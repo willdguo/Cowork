@@ -48,9 +48,32 @@ function App() {
     setStopwatch(Number(time))
   }
 
+
+  /* stuff to add:
+  <img src="twitter.png" alt="Twitter" />
+  <img src="linkedin.png" alt="LinkedIn" />
+  <img src="github.png" alt="GitHub" />
+  
+  <img src="img.png" alt="My Face" />
+  */
   return (
 
     <div>
+
+      <div class="container">
+
+        <h1> William Guo </h1>
+        <p> Insert image of my face </p>
+        <p class="bio"> Statistics major at Penn. Building something fun. </p>
+
+        <div class="social-links">
+          <a href="https://twitter.com/willdguo"> Twitter </a>
+          <a href="https://www.linkedin.com/in/william-guo-0b458118a/"> LinkedIn </a>
+          <a href="https://github.com/willdguo"> GitHub </a>
+        </div>
+
+      </div>
+
       <h1> Timer App </h1>
 
       <form onSubmit = {onSubmit}>

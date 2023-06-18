@@ -1,91 +1,56 @@
-import { useState, useEffect, useRef } from "react"
+import React from 'react'
+import twitterIcon from './images/twitter.png'
+import linkedinIcon from './images/linkedin.png'
+import githubIcon from './images/github.png'
+import substackIcon from './images/substack.png'
+import myFace from './images/willdguo_photo.jpg'
+import Timer from './components/Timer'
+import { useState } from 'react'
 
 function App() {
 
-  const [time, setTime] = useState(0)
-  const [stopwatch, setStopwatch] = useState(0)
-  const [txt, setTxt] = useState('')
+  const [dark, setDark] = useState(false)
 
-  const interval = useRef(50)
-  const counter = useRef(0)
+  const toggleTheme = () => {
+    setDark(!dark)
+    console.log(!dark)
+    updateTheme()
+  }
 
-  useEffect(() => {
+  const updateTheme = () => {
+    document.body.style.backgroundColor = dark ? '#ffffff' : '#14232D';
+    document.body.style.color = dark ? '#000000' : '#ffffff';
 
-    const timer = setTimeout(() => {
-      counter.current += 1
-
-      //console.log("hello world")
-
-      if(stopwatch > 0){
-        setTxt(`${txt} \u00A0`)
-
-        if(counter.current % 6000 === 0){
-          setStopwatch(stopwatch - 1)
-        }
-
-      }
-
-    }, interval.current)
-
-    return () => clearTimeout(timer)
-
-  }, [stopwatch, txt])
-
-  const handleTimeChange = (e) => {
-    const input = e.target.value
-
-    if(input === '' || /^\d+$/.test(input)){
-      setTime(input)
+    const introElement = document.querySelector('.intro');
+    if (introElement) {
+      introElement.style.borderColor = dark ? '#000000' : '#ffffff';
     }
 
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-
-    console.log(time)
-    setTime('')
-    setStopwatch(Number(time))
-  }
-
-
-  /* stuff to add:
-  <img src="twitter.png" alt="Twitter" />
-  <img src="linkedin.png" alt="LinkedIn" />
-  <img src="github.png" alt="GitHub" />
-  
-  <img src="img.png" alt="My Face" />
-  */
   return (
 
     <div>
 
-      <div class="container">
+      <div className = {`intro`}>
 
         <h1> William Guo </h1>
-        <p> Insert image of my face </p>
-        <p class="bio"> Statistics major at Penn. Building something fun. </p>
+        <img className = "headshot" src = {myFace} alt = "My Face" onClick = {toggleTheme} />
+        <p className ="bio"> Building fun stuff @ Penn </p>
 
-        <div class="social-links">
-          <a href="https://twitter.com/willdguo"> Twitter </a>
-          <a href="https://www.linkedin.com/in/william-guo-0b458118a/"> LinkedIn </a>
-          <a href="https://github.com/willdguo"> GitHub </a>
+        <div className ="social-links">
+          <a href="https://twitter.com/willdguo"> <img src = {twitterIcon} alt="Twitter" /> </a>
+          <a href="https://www.linkedin.com/in/william-guo-0b458118a/"> <img src = {linkedinIcon} alt = "LinkedIn" /> </a>
+          <a href="https://github.com/willdguo"> <img src = {githubIcon} alt="GitHub" /> </a>
+          <a href = "https://williamguo.substack.com/"> <img src = {substackIcon} alt = "Substack" /> </a>
         </div>
 
       </div>
 
-      <h1> Timer App </h1>
+      <Timer />
 
-      <form onSubmit = {onSubmit}>
-        <p> Timer Duration (minutes) </p>
-        <input value = {time} onChange = {handleTimeChange}/>
-      </form>
-
-      <p id = "stopwatch"> {stopwatch} </p>
-
-      <span style= {{backgroundColor: "lightblue", opacity: "50%"}}>{txt}</span>
-      
     </div>
+
 
   )
 }

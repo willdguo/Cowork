@@ -5,6 +5,7 @@ import githubIcon from './images/github.png'
 import substackIcon from './images/substack.png'
 import myFace from './images/willdguo_photo.jpg'
 import Timer from './components/Timer'
+import Puzzles from './components/Puzzles'
 import { useState } from 'react'
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
       </div>
 
       <Timer />
+
+      <Puzzles />
 
     </div>
 

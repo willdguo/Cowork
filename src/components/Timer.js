@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react'
+import audio from '../images/complete-jingle.wav'
+import { useState, useEffect, useRef } from 'react'
 
 const Timer = () => {
 
     const [input, setInput] = useState(0)
     const [time, setTime] = useState(0)
     const [running, setRunning] = useState(false)
+    const offScreenTime = useRef(new Date())
   
     const updateTime = (e) => {
       let minutes = e.target.value
@@ -19,41 +21,56 @@ const Timer = () => {
   
     useEffect(() => {
 
-        // console.log(time)
+        //console.log(`${time} curr ${new Date()}`)
         let countdown
-
-        const handleVisibilityChange = () => {
-
-            if(document.hidden) {
-                setRunning(false)
-            } else {
-                setRunning(true)
-            }
-
-        }
         
         if(time > 0 && running) {
-            countdown = setInterval(() => {
-            setTime(time - 1)
-            }, 1000)
+
+            if(!document.hidden){
+
+                offScreenTime.current = new Date()
+
+                countdown = setTimeout(() => {
+                    setTime(time - 1)
+                }, 1000)
+
+            } else {
+
+                countdown = setTimeout(() => {
+                    setTime(time - Math.round((new Date() - offScreenTime.current)/1000))
+                }, 1000)
+
+                offScreenTime.current = new Date()
+
+            }
+
         } else {
-            clearInterval(countdown)
+
+            if(time <= 0 && running){
+
+                setTimeout(() => {
+                    new Audio(audio).play()
+                }, 100)
+
+            }
+
+            clearTimeout(countdown)
             setRunning(false)
         }
-
-        document.addEventListener('visibilitychange', handleVisibilityChange)
     
         return () => {
-            clearInterval(countdown)
+            clearTimeout(countdown)
         }
 
     }, [time, running])
   
     const startTimer = (k = input) => {
-  
-      console.log("started timer")
-      setTime(k * 60)
-      setRunning(true)
+
+        if(k * 60 > 1){
+            console.log("started timer")
+            setTime(Math.floor(k * 60))
+            setRunning(true)
+        }
   
     }
 
@@ -61,7 +78,7 @@ const Timer = () => {
         
         <div className = "timer">
 
-            <h1> {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {time % 60} s </h1>
+            <h1> {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s </h1>
 
             Set Timer <input value = {input} onChange = {updateTime} />
 

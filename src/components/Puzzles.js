@@ -39,6 +39,10 @@ const Puzzles = () => {
         puzzles.map(puzzle => Array(puzzle.hints.length).fill(false))
     )
 
+    const [solVisibility, setSolVisibility] = useState(
+        puzzles.map(puzzle => false)    
+    )
+
 
     const toggleHintVisibility = (puzzleId, hintId) => {
         // console.log(puzzleId, hintId)
@@ -49,7 +53,9 @@ const Puzzles = () => {
         })
     }
 
-    //console.log(hintVisibility)
+    const toggleSolVisibility = (puzzleId) => {
+        setSolVisibility(!solVisibility[puzzleId])
+    }
 
     return (
         <div className = "puzzles">
@@ -70,6 +76,9 @@ const Puzzles = () => {
                             </div>
 
                         ))}
+
+                        <button onClick = {() => setSolVisibility(!solVisibility[puzzle.id])}> Solution {solVisibility[puzzle.id]} </button>
+                        {solVisibility[puzzle.id] ? <span> {puzzle.solution} </span> : ""}
 
                     </li>
                 ))}

@@ -118,6 +118,115 @@
         outline: none;
       }
 
+      .spotify-player {
+        margin-top: 20px;
+        background-color: #F8F8F8;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .spotify-player iframe {
+        width: 600px;
+        height: 100px;
+        border: none;
+      }
+
+      .tasks {
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 10px;
+        width: 25%;
+        margin: 0 auto;
+        font-family: Tahoma, Geneva, sans-serif;
+      }
+
+      .tasks ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: left;
+      }
+
+      .tasks li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        margin-left: 20px;
+      }
+
+      .tasks li input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      .tasks .strikethrough {
+        text-decoration: line-through;
+      }
+
+      .tasks button {
+        margin-left: 10px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        background-color: #66bb6a;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .tasks .header {
+        border-bottom: 1px solid black;
+      }
+
+      .tasks input[type="text"] {
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #333;
+        background-color: #F8F8F8;
+        height: 40px;
+        font-size: 20px;        
+        border: none;
+        /* border: 1px solid #ccc;
+        border-radius: 4px; */
+      }
+
+      .tasks input[type="text"]::placeholder {
+        color: #999;
+        font-style: italic;
+      }
+
+      .tasks input:focus {
+        outline: none;
+      }
+
+      .tasks .delete-button {
+        margin-left: auto;
+        background-color: #EE4747;
+        color: #FFFFFF;
+        border: none;
+        padding: 8px 16px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .tasks .delete-button:hover {
+        background-color: #DD0000;
+      }
+
+      .tasks .task-content{
+        border: none;
+        background-color: transparent;
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        padding: 0;
+        margin: 0;
+        outline: none;
+      }
+
     </style>
 
     <meta charset="utf-8" />

@@ -1,4 +1,5 @@
 import audio from '../images/complete-jingle.wav'
+import Tasks from './Tasks'
 import { useState, useEffect, useRef } from 'react'
 
 const Timer = () => {
@@ -12,7 +13,7 @@ const Timer = () => {
       let minutes = e.target.value
   
       if(!isNaN(minutes) && minutes >= 0){
-        console.log(minutes)
+        //console.log(minutes)
         setInput(minutes)
         setRunning(false)
       }
@@ -63,6 +64,14 @@ const Timer = () => {
         }
 
     }, [time, running])
+
+    const handleKeyDown = (e) => {
+
+        if(e.key === 'Enter') {
+            startTimer()
+        }
+
+    }
   
     const startTimer = (k = input) => {
 
@@ -80,7 +89,7 @@ const Timer = () => {
 
             <h1> {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s </h1>
 
-            Set Timer <input value = {input} onChange = {updateTime} />
+            Set Minutes <input value = {input} onChange = {updateTime} onKeyDown={handleKeyDown} />
 
             <br />
 
@@ -88,6 +97,19 @@ const Timer = () => {
             <button onClick = {() => startTimer(15)}> Start 15 min </button>
             <button onClick = {() => startTimer(60)}> Start 1 hr </button>
             
+            <div className = "spotify-player">
+                
+                <iframe 
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" 
+                    allowtransparency = "true" 
+                    allow = "encrypted-media" 
+                    title = "Peaceful Piano"
+                />
+
+            </div> 
+
+            <Tasks />
+
         </div>
     )
 }

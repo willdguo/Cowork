@@ -1,4 +1,4 @@
-import audio from '../images/complete-jingle.wav'
+import audio from '../images/timer_complete.mp3'
 import Tasks from './Tasks'
 import { useState, useEffect, useRef } from 'react'
 

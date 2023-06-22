@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import audio from '../images/task_complete.wav'
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([{content: "Add Tasks", status: false, id: 0}])
@@ -36,7 +37,25 @@ const Tasks = () => {
   }
 
   const handleTaskStatus = (id) => {
-    const updatedTasks = tasks.map(task => task.id === id ? {...task, status: !task.status} : task)
+    const updatedTasks = tasks.map(task => {
+
+      if(task.id === id){
+
+        if(!task.status){
+          
+          setTimeout(() => {
+            new Audio(audio).play()
+          }, 100)
+        }
+
+        return {...task, status: !task.status}
+
+      }
+
+      return task
+    
+    })
+
     setTasks(updatedTasks)
   }
 

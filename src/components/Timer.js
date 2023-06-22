@@ -93,9 +93,15 @@ const Timer = () => {
 
             <br />
 
-            <button onClick = {() => startTimer()}> Start </button>
-            <button onClick = {() => startTimer(15)}> Start 15 min </button>
-            <button onClick = {() => startTimer(60)}> Start 1 hr </button>
+            <div className = "timer-start">
+
+                <button onClick = {() => startTimer()}> Start </button>
+                <button onClick = {() => startTimer(15)}> Start 15 min </button>
+                <button onClick = {() => startTimer(60)}> Start 1 hr </button>
+                
+            </div>
+
+
             
             <div className = "spotify-player">
                 

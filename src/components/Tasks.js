@@ -94,23 +94,29 @@ const Tasks = () => {
 
         </div>
 
-        <ul>
-            {tasks.map(task => (
+        <div className = "task-list">
 
-                <li key = {task.id}>
-                    <input type="checkbox" checked={task.status} onChange={() => handleTaskStatus(task.id)} />
+          <ul>
+              {tasks.map(task => (
 
-                    <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
-                        value = {task.content} 
-                        onChange = {event => handleTaskEdit(task.id, event.target.value)}
-                    />
+                  <li key = {task.id}>
+                      <input type="checkbox" checked={task.status} onChange={() => handleTaskStatus(task.id)} />
 
-                    <button className = "delete-button" onClick = {() => handleDeleteTask(task.id)}> Delete </button>
-                </li>
+                      <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
+                          value = {task.content} 
+                          onChange = {event => handleTaskEdit(task.id, event.target.value)}
+                      />
 
-            ))}
+                      <button className = "delete-button" onClick = {() => handleDeleteTask(task.id)}> - </button>
+                  </li>
 
-        </ul>
+              ))}
+
+          </ul>
+
+        </div>
+
+
 
     </div>
     

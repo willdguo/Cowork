@@ -58,7 +58,7 @@
         
       }
 
-      .timer button {
+      .timer-start button {
         margin: 10px 10px 0;
         padding: 10px 20px;
         font-size: 16px;
@@ -71,7 +71,7 @@
         transition: background-color 0.3s ease;
       }
 
-      .timer button:hover {
+      .timer-start button:hover {
         background-color: #81c784;
       }
 
@@ -162,8 +162,11 @@
         text-decoration: line-through;
       }
 
-      .tasks button {
-        margin-left: 10px;
+      .tasks .header {
+        border-bottom: 1px solid black;
+      }
+
+      .tasks .header button {
         padding: 6px 12px;
         font-size: 14px;
         font-weight: bold;
@@ -172,25 +175,25 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
       }
 
-      .tasks .header {
-        border-bottom: 1px solid black;
+      .tasks .header button:hover{
+        background-color: #81c784;
       }
 
-      .tasks input[type="text"] {
+      .tasks .header input {
         padding: 6px 12px;
         font-size: 14px;
         color: #333;
         background-color: #F8F8F8;
+        width: 60%;
         height: 40px;
         font-size: 20px;        
         border: none;
-        /* border: 1px solid #ccc;
-        border-radius: 4px; */
       }
 
-      .tasks input[type="text"]::placeholder {
+      .tasks .header input::placeholder {
         color: #999;
         font-style: italic;
       }
@@ -200,11 +203,10 @@
       }
 
       .tasks .delete-button {
-        margin-left: auto;
         background-color: #EE4747;
         color: #FFFFFF;
         border: none;
-        padding: 8px 16px;
+        padding: 6px 14px;
         font-size: 14px;
         font-weight: bold;
         border-radius: 4px;
@@ -221,9 +223,9 @@
         background-color: transparent;
         font-family: inherit;
         font-size: inherit;
+        margin: 10px;
+        width: 60%;
         color: inherit;
-        padding: 0;
-        margin: 0;
         outline: none;
       }
 

@@ -151,15 +151,21 @@
         display: flex;
         align-items: center;
         margin-bottom: 10px;
-        margin-left: 20px;
+        margin-left: 5px;
+        width: 95%
       }
 
       .tasks li input[type="checkbox"] {
         margin-right: 10px;
       }
 
-      .tasks .strikethrough {
+      .strikethrough {
         text-decoration: line-through;
+      }
+
+      .task-list .progress {
+        background-color: #AFD5AA;
+        border-radius: 5px;
       }
 
       .tasks .header {
@@ -218,16 +224,70 @@
         background-color: #DD0000;
       }
 
-      .tasks .task-content{
+      .task-content {
         border: none;
         background-color: transparent;
         font-family: inherit;
         font-size: inherit;
         margin: 10px;
         width: 60%;
-        color: inherit;
+        color: #000;
         outline: none;
       }
+
+      .task-options {
+        position: relative;
+        display: inline-block;
+      }
+
+      .task-options-container {
+        position: absolute;
+        text-align: center;
+        top: 100%;
+        left: 0;
+        display: none;
+        width: 140px;
+        background-color: #ffffff;
+        padding: 5px;
+        border-radius: 4px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .task-options:hover .task-options-container {
+        display: block;
+      }
+
+      .task-option-button {
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 5px 10px;
+        display: block;
+        width: 100%;
+        transition: background-color 0.1s ease
+      }
+
+      .task-option-button:hover {
+        background-color: #B0B0B0
+      }
+
+      .task-options .show-options {
+        background-color: #A9A9A9;
+        color: #FFFFFF;
+        border: none;
+        padding: 6px 14px;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .task-options .show-options:hover {
+        background-color: #808080;
+      }
+
 
     </style>
 

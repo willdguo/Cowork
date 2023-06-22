@@ -2,7 +2,7 @@ import { useState } from 'react'
 import audio from '../images/task_complete.wav'
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([{content: "Add Tasks", status: false, id: 0}])
+  const [tasks, setTasks] = useState([{content: "Add Tasks", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
 
   const handleInputChange = (e) => {
@@ -46,9 +46,11 @@ const Tasks = () => {
           setTimeout(() => {
             new Audio(audio).play()
           }, 100)
+
+
         }
 
-        return {...task, status: !task.status}
+        return {...task, status: !task.status, progress: false}
 
       }
 
@@ -56,6 +58,11 @@ const Tasks = () => {
     
     })
 
+    setTasks(updatedTasks)
+  }
+
+  const handleTaskProgress = (id) => {
+    const updatedTasks = tasks.map(task => task.id === id ? {...task, progress: !task.progress} : task)
     setTasks(updatedTasks)
   }
 
@@ -99,7 +106,7 @@ const Tasks = () => {
           <ul>
               {tasks.map(task => (
 
-                  <li key = {task.id}>
+                  <li key = {task.id} className = {task.progress ? "progress" : ""}>
                       <input type="checkbox" checked={task.status} onChange={() => handleTaskStatus(task.id)} />
 
                       <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
@@ -107,7 +114,16 @@ const Tasks = () => {
                           onChange = {event => handleTaskEdit(task.id, event.target.value)}
                       />
 
-                      <button className = "delete-button" onClick = {() => handleDeleteTask(task.id)}> - </button>
+                      <div className="task-options">
+
+                        <button className = "show-options"> ... </button>
+
+                        <div className="task-options-container">
+                          <button className="task-option-button" onClick={() => handleTaskProgress(task.id)}> {task.progress ? 'Remove ' : 'Set In '} Progress </button>
+                          <button className = "delete-button" onClick={() => handleDeleteTask(task.id)}> Delete Task </button>
+                        </div>
+
+                      </div>
                   </li>
 
               ))}

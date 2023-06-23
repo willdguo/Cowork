@@ -4,6 +4,7 @@ import audio from '../images/task_complete.wav'
 const Tasks = () => {
   const [tasks, setTasks] = useState([{content: "Add Tasks", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
+  const [draggedItemId, setDraggedItemId] = useState(-1)
 
   const handleInputChange = (e) => {
     setNewTask(e.target.value)
@@ -81,6 +82,44 @@ const Tasks = () => {
     //console.log(updatedTasks)
   }
 
+  const handleDragStart = (event, id) => {
+    setDraggedItemId(id)
+  }
+  
+  const handleDragOver = (event) => {
+
+    event.preventDefault()
+  
+    const draggedItemIndex = tasks.findIndex(task => task.id === draggedItemId)
+    
+    const targetItem = event.target.closest("li")
+    const targetItemId = targetItem.getAttribute("data-task-id")
+    const targetItemIndex = tasks.findIndex(task => task.id === Number(targetItemId))
+    
+    const targetRect = targetItem.getBoundingClientRect()
+    const targetOffset = targetRect.y + targetRect.height / 2
+    
+    const moveUp = draggedItemIndex > targetItemIndex && event.clientY < targetOffset
+    const moveDown = draggedItemIndex < targetItemIndex && event.clientY > targetOffset
+    
+    //console.log(draggedItemIndex, targetItemIndex)
+
+    if (moveUp || moveDown) {
+      //console.log(moveUp, moveDown)
+
+      const updatedTasks = [...tasks]
+      const [draggedItem] = updatedTasks.splice(draggedItemIndex, 1)
+      updatedTasks.splice(targetItemIndex, 0, draggedItem)
+      setTasks(updatedTasks)
+    }
+
+  }
+  
+  const handleDrop = (event, id) => {
+    event.preventDefault()
+  }
+  
+
   return (
 
     <div className="tasks">
@@ -106,7 +145,11 @@ const Tasks = () => {
           <ul>
               {tasks.map(task => (
 
-                  <li key = {task.id} className = {task.progress ? "progress" : ""}>
+                  <li key = {task.id} data-task-id = {task.id} className = {task.progress ? "progress" : ""} draggable = "true" 
+                    onDragStart = {event => handleDragStart(event, task.id)} 
+                    onDragOver = {event => handleDragOver(event, task.id)} 
+                    onDrop = {event => handleDrop(event, task.id)}
+                  >
                       <input type="checkbox" checked={task.status} onChange={() => handleTaskStatus(task.id)} />
 
                       <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
@@ -115,7 +158,6 @@ const Tasks = () => {
                       />
 
                       <div className="task-options">
-
                         <button className = "show-options"> ... </button>
 
                         <div className="task-options-container">

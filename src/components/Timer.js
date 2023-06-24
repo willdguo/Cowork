@@ -38,7 +38,7 @@ const Timer = () => {
             } else {
 
                 countdown = setTimeout(() => {
-                    setTime(time - Math.round((new Date() - offScreenTime.current)/1000))
+                    setTime(Math.max(time - Math.round((new Date() - offScreenTime.current)/1000)), 0)
                 }, 1000)
 
                 offScreenTime.current = new Date()
@@ -98,7 +98,7 @@ const Timer = () => {
                 <button onClick = {() => startTimer()}> Start </button>
                 <button onClick = {() => startTimer(15)}> Start 15 min </button>
                 <button onClick = {() => startTimer(60)}> Start 1 hr </button>
-                
+
             </div>
 
 

@@ -10,21 +10,26 @@ const Tasks = () => {
     setNewTask(e.target.value)
   }
 
-  const handleAddTask = () => {
+  const handleAddTask = (input = newTask, index = tasks.length) => {
 
-    if (newTask.trim() !== '') {
+    if (input.trim() !== '') {
 
         const maxId = tasks.length > 0
             ? Math.max(...tasks.map(task => Number(task.id))) + 1
             : 0
     
         const addedTask = {
-            content: newTask,
+            content: input,
             status: false,
             id: maxId
         }
         
-        setTasks([...tasks, addedTask])
+        const temp = [...tasks]
+        temp.splice(index, 0, addedTask)
+
+        console.log(temp)
+
+        setTasks(temp)
         setNewTask('')
 
         console.log(addedTask)
@@ -155,6 +160,7 @@ const Tasks = () => {
                       <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
                           value = {task.content} 
                           onChange = {event => handleTaskEdit(task.id, event.target.value)}
+                          onKeyDown = {event => {if(event.key === 'Enter'){handleAddTask('New Task', tasks.indexOf(task) + 1)}}}
                       />
 
                       <div className="task-options">

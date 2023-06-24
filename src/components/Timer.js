@@ -1,5 +1,4 @@
 import audio from '../images/timer_complete.mp3'
-import Tasks from './Tasks'
 import { useState, useEffect, useRef } from 'react'
 
 const Timer = () => {
@@ -100,21 +99,6 @@ const Timer = () => {
                 <button onClick = {() => startTimer(60)}> Start 1 hr </button>
 
             </div>
-
-
-            
-            <div className = "spotify-player">
-                
-                <iframe 
-                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" 
-                    allowtransparency = "true" 
-                    allow = "encrypted-media" 
-                    title = "Peaceful Piano"
-                />
-
-            </div> 
-
-            <Tasks />
 
         </div>
     )

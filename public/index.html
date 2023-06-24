@@ -6,51 +6,14 @@
 
       body {
         font-family: Verdana, Geneva, Tahoma, sans-serif;
-      }
-
-      .intro {
-        width: 500px;
-        text-align: center;
-        margin: 0 auto;
-        padding: 20px;
-        border: 1px solid black;
-        border-radius: 4px;
-      }
-
-      .headshot {
-        width: 200px;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 50%;
-        overflow: hidden;
-      }
-
-      .bio {
-        font-size: 18px;
-        margin-top: 10px;
-        font-style: italic;
-      }
-      
-      .social-links {
-        margin-top: 20px;
-      }
-
-      .social-links a {
-        display: inline-block;
-        margin: 10px 30px 10px 30px;
-      }
-      
-      .social-links img {
-        width: 30px;
-        height: 30px;
+        background-color: #F8F8F8;
       }
 
       .timer {
         text-align: center;
-        background-color: #F8F8F8;
         padding: 20px;
         margin: 50px;
-        
+        border: 1px solid black;
       }
 
       .timer-start button {
@@ -76,17 +39,26 @@
       }
 
       .spotify-player {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 10;
         margin-top: 20px;
-        background-color: #F8F8F8;
         padding: 10px;
         display: flex;
         justify-content: center;
       }
 
       .spotify-player iframe {
-        width: 600px;
-        height: 100px;
+        width: 500px;
+        height: 80px;
         border: none;
+      }
+
+      @media (max-width: 1000px){
+        .spotify-player iframe {
+          width: 250px;
+        }
       }
 
       .tasks {

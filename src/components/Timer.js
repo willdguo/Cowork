@@ -37,7 +37,7 @@ const Timer = () => {
             } else {
 
                 countdown = setTimeout(() => {
-                    setTime(Math.max(time - Math.round((new Date() - offScreenTime.current)/1000)), 0)
+                    setTime(time - Math.round((new Date() - offScreenTime.current)/1000), 0)
                 }, 1000)
 
                 offScreenTime.current = new Date()

@@ -9,6 +9,115 @@
         background-color: #F8F8F8;
       }
 
+      .container {
+        display: flex;
+      }
+
+      .sidebar {
+        flex: 0 0 25%; /* Set the width of the sidebar */
+        background-color: #f1f1f1;
+        padding: 20px;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 20px;
+      }
+
+
+      .goals {
+        text-align: center;
+        /* border: 1px solid black; */
+        border-radius: 10px;
+        width: 100%;
+        margin: 0 auto;
+        font-family: Tahoma, Geneva, sans-serif;
+
+        .header {
+          border-bottom: 2px solid black;
+
+          & button {
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #66bb6a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+              background-color: #81c784;
+            }
+          }
+
+          & input {
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #333;
+            background-color: #f1f1f1;
+            width: 60%;
+            height: 40px;
+            font-size: 20px;        
+            border: none;
+
+            &::placeholder {
+              color: #999;
+              font-style: italic;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+        }
+
+        .goal-list {
+          & ul {
+            list-style-type: none;
+            padding: 0;
+          }
+
+          & li {
+            display: flex;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            width: 95%
+          }
+
+          .delete-button {
+            background-color: #EE4747;
+            color: #FFFFFF;
+            border: none;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            height: 30px;
+
+            &:hover {
+              background-color: #d00
+            }
+          }
+
+          .goal-content {
+            border: none;
+            background-color: transparent;
+            font-family: inherit;
+            font-weight: bold;
+            font-size: 16px;
+            margin: 10px;
+            width: 80%;
+            color: #333;
+            outline: none;
+          }
+        }
+      }
+
       .timer {
         text-align: center;
         padding: 20px;
@@ -16,47 +125,47 @@
         border: 1px solid #E0E0E0;
         background-color: #F5F5F5;
         border-radius: 8px;
-      }
 
-      .timer h1 {
-        font-size: 36px;
-        margin-bottom: 20px;
-        font-weight: bold;
-      }
+        & h1 {
+          font-size: 36px;
+          margin-bottom: 20px;
+          font-weight: bold;
+        }
 
-      .timer input {
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #E0E0E0;
-        border-radius: 4px;
-        margin-bottom: 10px;
-      }
+        & input {
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #E0E0E0;
+          border-radius: 4px;
+          margin-bottom: 10px;
+        }
 
-      .timer-start {
-        margin-top: 20px;
-      }
+        .timer-start {
+          margin-top: 20px;
 
-      .timer-start button {
-        margin: 10px;
-        padding: 12px 24px;
-        font-size: 16px;
-        font-weight: bold;
-        color: #FFFFFF;
-        background-color: #66bb6a;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
+          & button {
+            margin: 10px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background-color: #66bb6a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
-      .timer-start button:hover {
-        background-color: #81c784;
-      }
-
-      .timer button:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px #ffffff;
+            &:hover {
+              background-color: #81c784;
+            } 
+            
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px #ffffff;
+            }
+          }
+        }
       }
 
       .spotify-player {
@@ -68,12 +177,12 @@
         padding: 10px;
         display: flex;
         justify-content: center;
-      }
 
-      .spotify-player iframe {
-        width: 500px;
-        height: 80px;
-        border: none;
+        & iframe {
+          width: 500px;
+          height: 80px;
+          border: none;
+        }
       }
 
       @media (max-width: 1000px){
@@ -86,163 +195,166 @@
         text-align: center;
         border: 1px solid black;
         border-radius: 10px;
-        width: 25%;
+        width: 30%;
         margin: 0 auto;
         font-family: Tahoma, Geneva, sans-serif;
-      }
 
-      .tasks ul {
-        list-style-type: none;
-        padding: 0;
-        text-align: left;
-      }
+        .header {
+          border-bottom: 1px solid black;
 
-      .task-list li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-        margin-left: 5px;
-        width: 95%
-      }
+          & button {
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #66bb6a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
 
-      .task-list li.dragged {
-        background-color: #000000
-      }
+            &:hover{
+              background-color: #81c784;
+            }
+          }
 
-      .tasks li input[type="checkbox"] {
-        margin-right: 10px;
+          & input {
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #333;
+            background-color: #F8F8F8;
+            width: 60%;
+            height: 40px;
+            font-size: 20px;        
+            border: none;
+
+            &::placeholder {
+              color: #999;
+              font-style: italic;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+        }
+
+        .task-list {
+          & ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+          }
+
+          & li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-left: 5px;
+            width: 95%;
+
+            & input[type = "checkbox"] {
+              margin-right: 10px;
+            }
+          }
+
+          .progress {
+            background-color: #AFD5AA;
+            border-radius: 5px;
+          }
+
+          .delete-button {
+            background-color: #EE4747;
+            color: #FFFFFF;
+            border: none;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+              background-color: #DD0000;
+            }
+          }
+
+          .task-content {
+            border: none;
+            background-color: transparent;
+            font-family: inherit;
+            font-size: inherit;
+            margin: 10px;
+            width: 80%;
+            color: #000;
+            outline: none;
+          }
+
+          .task-options {
+            position: relative;
+            display: inline-block;
+
+            .task-options-container {
+              z-index: 1;
+              position: absolute;
+              text-align: center;
+              top: 100%;
+              left: 20%;
+              display: none;
+              width: 140px;
+              background-color: #ffffff;
+              padding: 5px;
+              border-radius: 4px;
+              box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            &:hover .task-options-container {
+                display: block;
+            }
+
+            .task-option-button {
+              background-color: transparent;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              padding: 5px 10px;
+              display: block;
+              width: 100%;
+              transition: background-color 0.1s ease;
+
+              &:hover {
+                background-color: #b0b0b0
+              }
+
+            }
+
+            .show-options {
+              background-color: #A9A9A9;
+              color: #FFFFFF;
+              border: none;
+              padding: 6px 14px;
+              font-size: 14px;
+              font-weight: bold;
+              border-radius: 4px;
+              cursor: pointer;
+              transition: background-color 0.3s ease;
+
+              & :hover {
+                background-color: #808080;
+              }
+
+            }
+
+          }
+
+        }
+
       }
 
       .strikethrough {
         text-decoration: line-through;
       }
-
-      .task-list .progress {
-        background-color: #AFD5AA;
-        border-radius: 5px;
-      }
-
-      .tasks .header {
-        border-bottom: 1px solid black;
-      }
-
-      .tasks .header button {
-        padding: 6px 12px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #fff;
-        background-color: #66bb6a;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .tasks .header button:hover{
-        background-color: #81c784;
-      }
-
-      .tasks .header input {
-        padding: 6px 12px;
-        font-size: 14px;
-        color: #333;
-        background-color: #F8F8F8;
-        width: 60%;
-        height: 40px;
-        font-size: 20px;        
-        border: none;
-      }
-
-      .tasks .header input::placeholder {
-        color: #999;
-        font-style: italic;
-      }
-
-      .tasks input:focus {
-        outline: none;
-      }
-
-      .tasks .delete-button {
-        background-color: #EE4747;
-        color: #FFFFFF;
-        border: none;
-        padding: 6px 14px;
-        font-size: 14px;
-        font-weight: bold;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .tasks .delete-button:hover {
-        background-color: #DD0000;
-      }
-
-      .task-content {
-        border: none;
-        background-color: transparent;
-        font-family: inherit;
-        font-size: inherit;
-        margin: 10px;
-        width: 60%;
-        color: #000;
-        outline: none;
-      }
-
-      .task-options {
-        position: relative;
-        display: inline-block;
-      }
-
-      .task-options-container {
-        z-index: 1;
-        position: absolute;
-        text-align: center;
-        top: 100%;
-        left: 20%;
-        display: none;
-        width: 140px;
-        background-color: #ffffff;
-        padding: 5px;
-        border-radius: 4px;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      }
-
-      .task-options:hover .task-options-container {
-        display: block;
-      }
-
-      .task-option-button {
-        background-color: transparent;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        padding: 5px 10px;
-        display: block;
-        width: 100%;
-        transition: background-color 0.1s ease
-      }
-
-      .task-option-button:hover {
-        background-color: #B0B0B0
-      }
-
-      .task-options .show-options {
-        background-color: #A9A9A9;
-        color: #FFFFFF;
-        border: none;
-        padding: 6px 14px;
-        font-size: 14px;
-        font-weight: bold;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-
-      .task-options .show-options:hover {
-        background-color: #808080;
-      }
-
 
     </style>
 

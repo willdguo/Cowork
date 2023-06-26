@@ -12,6 +12,9 @@ const Tasks = () => {
 
   const handleAddTask = (input = newTask, index = tasks.length) => {
 
+    console.log(input)
+    console.log(typeof(input))
+
     if (input.trim() !== '') {
 
         const maxId = tasks.length > 0
@@ -141,7 +144,7 @@ const Tasks = () => {
                 placeholder = "Enter a task"
             />
 
-            <button onClick = {handleAddTask}> + </button>
+            <button onClick = {() => handleAddTask()}> + </button>
 
         </div>
 

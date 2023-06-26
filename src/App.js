@@ -1,15 +1,24 @@
 import React from 'react'
 import Timer from './components/Timer'
 import Tasks from './components/Tasks'
+import Goals from './components/Goals'
 
 
 function App() {
 
   return (
 
-    <div>
+    <div className = "container">
+      
+      <div className = "sidebar">
+        <Goals />
+      </div>
 
-      <Timer />
+      <div className = "main-content">
+        <Timer />
+        <Tasks />
+      </div>
+
 
       <div className = "spotify-player">
                 
@@ -22,7 +31,6 @@ function App() {
 
       </div> 
 
-      <Tasks />
 
     </div>
 

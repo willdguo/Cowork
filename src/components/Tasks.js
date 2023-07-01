@@ -1,8 +1,11 @@
 import { useState } from 'react'
-import audio from '../images/task_complete.wav'
+import audio from '../sounds/task_complete.wav'
+import audio2 from '../sounds/add-task-sound.mp3'
+import audio3 from '../sounds/delete-task-sound.mp3'
+import audio4 from '../sounds/click-21156.mp3'
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([{content: "Add Tasks", status: false, progress: false, id: 0}])
+  const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
 
@@ -36,6 +39,8 @@ const Tasks = () => {
         setNewTask('')
 
         console.log(addedTask)
+
+        new Audio(audio2).play()
     }
 
   }
@@ -43,6 +48,8 @@ const Tasks = () => {
   const handleDeleteTask = (id) => {
     const updatedTasks = tasks.filter(task => task.id !== id)
     setTasks(updatedTasks)
+
+    new Audio(audio3).play()
   }
 
   const handleTaskStatus = (id) => {
@@ -51,12 +58,7 @@ const Tasks = () => {
       if(task.id === id){
 
         if(!task.status){
-          
-          setTimeout(() => {
-            new Audio(audio).play()
-          }, 100)
-
-
+          new Audio(audio).play()
         }
 
         return {...task, status: !task.status, progress: false}
@@ -71,7 +73,19 @@ const Tasks = () => {
   }
 
   const handleTaskProgress = (id) => {
-    const updatedTasks = tasks.map(task => task.id === id ? {...task, progress: !task.progress} : task)
+    const updatedTasks = tasks.map(task => {
+      if (task.id === id) {
+
+        if (!task.progress) {
+          new Audio(audio4).play()
+        }
+
+        task = {...task, progress: !task.progress}
+      }
+
+      return task
+    })
+
     setTasks(updatedTasks)
   }
 

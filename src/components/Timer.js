@@ -1,4 +1,4 @@
-import audio from '../images/timer_complete.mp3'
+import audio from '../sounds/timer_complete.mp3'
 import { useState, useEffect, useRef } from 'react'
 
 const Timer = () => {

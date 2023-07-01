@@ -8,6 +8,7 @@ import Goals from './components/Goals'
 function App() {
 
   const [desc, setDesc] = useState('')
+  const [dark, setDark] = useState('')
   const finalDesc = "Inspired by hours.me"
   const n = useRef(0)
   const t = useRef(300)
@@ -54,24 +55,34 @@ function App() {
       })
   }
 
+  const toggleDark = () => {
+
+    if (dark === 'dark') {
+      setDark('')
+    } else {
+      setDark('dark')
+    }
+
+  }
+
   return (
 
-    <div className = "container">
+    <div className = {`container ${dark}`}>
       
       <div className = "sidebar">
         
         <div className = "description">
-          <h1> TimeWise </h1>
+          <h1 onClick = {toggleDark} > TimeWise </h1>
 
           <p style = {{whiteSpace: 'pre-line'}}> <i> {desc} </i> </p>
 
-          <button onClick={handleCopyLink}>
+          <button className = {dark} onClick={handleCopyLink}>
             {copied ? 'Link Copied!' : 'Share this link!'}
           </button>
           
         </div>
 
-        <Goals />
+        <Goals dark = {dark} />
 
 
         <div className = "spotify-player">
@@ -88,14 +99,14 @@ function App() {
       </div>
 
       <div className = "main-content">
-        <Timer />
+        <Timer dark = {dark} />
 
         <div className = "tasks-grid">
-          <Tasks />
+          <Tasks dark = {dark} />
+          {/* <button onClick = {toggleDark}> {dark === 'dark' ? 'Light' : 'Dark'} </button> */}
         </div>
 
       </div>
-
 
     </div>
 

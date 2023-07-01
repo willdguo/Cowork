@@ -2,32 +2,36 @@ html,
 body,
 #root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #F8F8F8;
   height: 100%;
 }
 
 .container {
   display: flex;
   height: 100%;
+  background-color: #f1f1f1
+}
+
+.dark {
+  background-color: #36454F;
+  color: #F8F8F8;
 }
 
 .sidebar {
   width: 40%;
-  background-color: #f1f1f1;
-  border: 1px solid #E0E0E0;
-  border-radius: 8px;
+  background-color: transparent;
+  border-right: 1px solid #E0E0E0;
   padding: 10px;
   height: 100%;
 
   .description {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 10px;
     padding: 5px;
     text-align: center;
 
     & button {
       padding: 10px 20px;
-      background-color: #bbb;
+      background-color: #333;
       color: #eeeeee;
       border: none;
       border-radius: 4px;
@@ -37,8 +41,11 @@ body,
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #999;
+        background-color: #f1f1f1;
+        color: #000;
+        border: 1px solid black;
       }
+
     }
 
   }
@@ -78,6 +85,20 @@ body,
 
     .header {
       border-bottom: 2px solid black;
+
+      &.dark {
+        border-bottom: 2px solid #f1f1f1;
+
+        & input{
+          color: #eee;
+
+          &::placeholder {
+            color: #bbb;
+          }
+      
+        }
+
+      }
   
       & button {
         padding: 6px 12px;
@@ -99,7 +120,7 @@ body,
         padding: 6px 12px;
         font-size: 14px;
         color: #333;
-        background-color: #f1f1f1;
+        background-color: transparent;
         width: 60%;
         height: 40px;
         font-size: 20px;        
@@ -159,7 +180,17 @@ body,
         color: #333;
         outline: none;
       }
+
+      &.dark {
+
+        .goal-content {
+          color: #ddd;
+        }
+
+      }
+
     }
+
   }
   
 }
@@ -184,7 +215,7 @@ body,
   padding-bottom: 5px;
   margin-bottom: 10px;
   border: 1px solid #E0E0E0;
-  background-color: #F5F5F5;
+  background-color: transparent;
   border-radius: 8px;
 
   & button {
@@ -201,7 +232,9 @@ body,
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     &:hover {
-      background-color: #666;
+      background-color: transparent;
+      /* border: 1px solid white; */
+      color: #000;
     } 
     
     &:focus {
@@ -227,6 +260,12 @@ body,
       border-radius: 4px;
       margin-bottom: 10px;
     }
+
+    &.dark {
+      & button:hover{
+        background-color: #F1F1F1;
+      }
+    }
     
   }
 
@@ -239,7 +278,7 @@ body,
 
 .tasks {
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #999;
   border-radius: 10px;
   margin: 10px;
   width: 30%;
@@ -268,7 +307,7 @@ body,
       padding: 6px 12px;
       font-size: 14px;
       color: #333;
-      background-color: #F8F8F8;
+      background-color: transparent;
       width: 60%;
       height: 40px;
       font-size: 20px;        
@@ -281,6 +320,18 @@ body,
 
       &:focus {
         outline: none;
+      }
+    }
+
+    &.dark {
+      border-bottom: 1px solid white;
+
+      & input {
+        color: #eee;
+
+        & ::placeholder {
+          color: #bbb;
+        }
       }
     }
 
@@ -298,16 +349,23 @@ body,
       align-items: center;
       margin-bottom: 10px;
       margin-left: 5px;
+      padding-right: 5px;
       width: 95%;
 
       & input[type = "checkbox"] {
+        background-color: transparent;
         margin-right: 10px;
       }
+
     }
 
     .progress {
       background-color: #AFD5AA;
       border-radius: 5px;
+
+      &.dark {
+        background-color: #1D2E3A;
+      }
     }
 
     .delete-button {
@@ -335,6 +393,10 @@ body,
       width: 80%;
       color: #000;
       outline: none;
+
+      &.dark {
+        color: white;
+      }
     }
 
     .task-options {

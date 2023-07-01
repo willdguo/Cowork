@@ -4,7 +4,7 @@ import audio2 from '../sounds/add-task-sound.mp3'
 import audio3 from '../sounds/delete-task-sound.mp3'
 import audio4 from '../sounds/click-21156.mp3'
 
-const Tasks = () => {
+const Tasks = ( {dark} ) => {
   const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
@@ -146,7 +146,7 @@ const Tasks = () => {
 
     <div className="tasks">
 
-        <div className = "header">
+        <div className = {`header ${dark}`}>
 
             <h1> To-Do List </h1>
 
@@ -167,14 +167,14 @@ const Tasks = () => {
           <ul>
               {tasks.map(task => (
 
-                  <li key = {task.id} data-task-id = {task.id} className = {task.progress ? "progress" : ""} draggable = "true" 
+                  <li key = {task.id} data-task-id = {task.id} className = {`${dark} ${task.progress ? "progress" : ""}`} draggable = "true" 
                     onDragStart = {event => handleDragStart(event, task.id)} 
                     onDragOver = {event => handleDragOver(event, task.id)} 
                     onDrop = {event => handleDrop(event, task.id)}
                   >
                       <input type="checkbox" checked={task.status} onChange={() => handleTaskStatus(task.id)} />
 
-                      <input className = {"task-content " + (task.status ? "strikethrough" : "")} 
+                      <input className = {`task-content ${dark} ` + (task.status ? "strikethrough" : "")} 
                           value = {task.content} 
                           onChange = {event => handleTaskEdit(task.id, event.target.value)}
                           // onKeyDown = {event => {if(event.key === 'Enter'){handleAddTask('New Task', tasks.indexOf(task) + 1)}}}

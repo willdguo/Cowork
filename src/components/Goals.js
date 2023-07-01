@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-const Goals = () => {
+const Goals = ( {dark} ) => {
 
     const [goals, setGoals] = useState([])
     const [newGoal, setNewGoal] = useState('')
@@ -59,7 +59,7 @@ const Goals = () => {
     return (
         <div className = "goals"> 
 
-            <div className = "header">
+            <div className = {`header ${dark}`}>
                 <h1> Goals </h1>
 
                 <input
@@ -73,7 +73,7 @@ const Goals = () => {
                 <button onClick = {() => handleAddGoal()}> + </button>
             </div>
 
-            <div className = "goal-list">
+            <div className = {`goal-list ${dark}`}>
                 <ul>
                     {goals.map(goal => (
                         <li key = {goal.id}>

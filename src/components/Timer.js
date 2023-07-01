@@ -1,7 +1,7 @@
 import audio from '../sounds/timer_complete.mp3'
 import { useState, useEffect, useRef } from 'react'
 
-const Timer = () => {
+const Timer = ( {dark} ) => {
 
     const [input, setInput] = useState(0)
     const [time, setTime] = useState(0)
@@ -90,6 +90,9 @@ const Timer = () => {
         setTime(Math.floor(input * 60))
     }
 
+    //TO DO:
+    // fix all  "hidden" and "time > 0" ternary operators
+
     return (
         
         <div className = "timer-container">
@@ -98,17 +101,18 @@ const Timer = () => {
                 {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s 
             </div>
 
-            <div className = 'timer-customize'>
+            <div className = {`timer-customize ${dark}`}>
 
                 <div> 
                     Set Minutes <input value = {input} onChange = {updateTime} onKeyDown={handleKeyDown} />
                 </div>
 
-                <button onClick = {running ? () => flipTimer() : (time > 0 ? () => flipTimer() : () => startTimer())}> {running ? 'Pause' : (time > 0 ? 'Continue' : 'Start')} </button>
+                <button onClick = {running ? () => flipTimer() : (time > 0 ? () => flipTimer() : () => startTimer())}> {running ? 'Pause' : 'Start'} </button>
                 <button className = {`reset ${running ? '' : 'hidden'}`} onClick = {() => resetTimer()}> Reset </button>
 
                 <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(15)}> Start 15 min </button>
                 <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(60)}> Start 1 hr </button>
+
             </div>
 
         </div>

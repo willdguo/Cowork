@@ -72,6 +72,19 @@ function App() {
         </div>
 
         <Goals />
+
+
+        <div className = "spotify-player">
+                
+                <iframe 
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" 
+                    allowtransparency = "true" 
+                    allow = "encrypted-media" 
+                    title = "Peaceful Piano"
+                />
+      
+        </div> 
+
       </div>
 
       <div className = "main-content">
@@ -82,18 +95,6 @@ function App() {
         </div>
 
       </div>
-
-
-      <div className = "spotify-player">
-                
-          <iframe 
-              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" 
-              allowtransparency = "true" 
-              allow = "encrypted-media" 
-              title = "Peaceful Piano"
-          />
-
-      </div> 
 
 
     </div>

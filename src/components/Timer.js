@@ -12,16 +12,13 @@ const Timer = () => {
       let minutes = e.target.value
   
       if(!isNaN(minutes) && minutes >= 0){
-        //console.log(minutes)
         setInput(minutes)
-        setRunning(false)
       }
   
     }
   
     useEffect(() => {
 
-        //console.log(`${time} curr ${new Date()}`)
         let countdown
         
         if(time > 0 && running) {
@@ -73,8 +70,10 @@ const Timer = () => {
     }
   
     const startTimer = (k = input) => {
+        console.log(k)
 
         if(k * 60 > 1){
+            setInput(k)
             console.log("started timer")
             setTime(Math.floor(k * 60))
             setRunning(true)
@@ -82,22 +81,34 @@ const Timer = () => {
   
     }
 
+    const flipTimer = () => {
+        setRunning(!running)
+    }
+
+    const resetTimer = () => {
+        setRunning(false)
+        setTime(Math.floor(input * 60))
+    }
+
     return (
         
-        <div className = "timer">
+        <div className = "timer-container">
 
-            <h1> {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s </h1>
+            <div className = "timer"> 
+                {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s 
+            </div>
 
-            Set Minutes <input value = {input} onChange = {updateTime} onKeyDown={handleKeyDown} />
+            <div className = 'timer-customize'>
 
-            <br />
+                <div> 
+                    Set Minutes <input value = {input} onChange = {updateTime} onKeyDown={handleKeyDown} />
+                </div>
 
-            <div className = "timer-start">
+                <button onClick = {running ? () => flipTimer() : (time > 0 ? () => flipTimer() : () => startTimer())}> {running ? 'Pause' : (time > 0 ? 'Continue' : 'Start')} </button>
+                <button className = {`reset ${running ? '' : 'hidden'}`} onClick = {() => resetTimer()}> Reset </button>
 
-                <button onClick = {() => startTimer()}> Start </button>
-                <button onClick = {() => startTimer(15)}> Start 15 min </button>
-                <button onClick = {() => startTimer(60)}> Start 1 hr </button>
-
+                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(15)}> Start 15 min </button>
+                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(60)}> Start 1 hr </button>
             </div>
 
         </div>

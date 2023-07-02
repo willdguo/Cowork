@@ -8,7 +8,7 @@ import Goals from './components/Goals'
 function App() {
 
   const [desc, setDesc] = useState('')
-  const [dark, setDark] = useState('')
+  const [dark, setDark] = useState('dark')
   const finalDesc = "Inspired by hours.me"
   const n = useRef(0)
   const t = useRef(300)
@@ -69,13 +69,14 @@ function App() {
 
     <div className = {`container ${dark}`}>
       
-      <div className = "sidebar">
+      <div className = {`sidebar ${dark}`}>
         
         <div className = "description">
-          <h1 onClick = {toggleDark} > TimeWise </h1>
+          <h1> TimeWise </h1>
 
           <p style = {{whiteSpace: 'pre-line'}}> <i> {desc} </i> </p>
-
+          
+          <button onClick = {toggleDark}> Toggle colors </button>          
           <button className = {dark} onClick={handleCopyLink}>
             {copied ? 'Link Copied!' : 'Share this link!'}
           </button>
@@ -88,7 +89,7 @@ function App() {
         <div className = "spotify-player">
                 
                 <iframe 
-                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO" 
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" 
                     allowtransparency = "true" 
                     allow = "encrypted-media" 
                     title = "Peaceful Piano"

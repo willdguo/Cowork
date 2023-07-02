@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import audio from '../sounds/task_complete.wav'
-import audio2 from '../sounds/add-task-sound.mp3'
+import audio4 from '../sounds/add-task-sound.mp3'
 import audio3 from '../sounds/delete-task-sound.mp3'
-import audio4 from '../sounds/click-21156.mp3'
+import audio2 from '../sounds/click-21156.mp3'
 
 const Tasks = ( {dark} ) => {
   const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])

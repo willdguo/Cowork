@@ -49,7 +49,7 @@ const Tasks = ( {dark} ) => {
     const updatedTasks = tasks.filter(task => task.id !== id)
     setTasks(updatedTasks)
 
-    new Audio(audio3).play()
+    new Audio(audio2).play()
   }
 
   const handleTaskStatus = (id) => {

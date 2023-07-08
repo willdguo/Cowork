@@ -10,12 +10,13 @@ import darkIcon from './icons/light.png'
 import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
 
-
 function App() {
 
   const [desc, setDesc] = useState('')
   const [dark, setDark] = useState('dark')
   const [user, setUser] = useState(null)
+
+  const [spotifyMessage, setSpotifyMessage] = useState(' Sign into Spotify in a separate tab to use the web player.')
 
   const finalDesc = "Inspired by hours.me"
   const n = useRef(0)
@@ -34,6 +35,9 @@ function App() {
       tasksService.setToken(savedUser.token)
     }
 
+    setTimeout(() => {
+      setSpotifyMessage(null)
+    }, 15000)
   }, [])
 
 
@@ -107,15 +111,20 @@ function App() {
         <Goals dark = {dark} />
   
         <div className = "spotify-player">
+          <p> {spotifyMessage} </p>
                 
-                <iframe 
-                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" 
-                    allowtransparency = "true" 
-                    allow = "encrypted-media" 
-                    title = "Peaceful Piano"
-                />
-      
+          <iframe 
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" 
+              allowtransparency = "true" 
+              allow = "encrypted-media" 
+              title = "Peaceful Piano"
+          />
+
         </div> 
+
+        <div id = "embed-iframe">
+
+        </div>
   
       </div>
 

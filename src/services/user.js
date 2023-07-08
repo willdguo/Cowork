@@ -1,5 +1,5 @@
 import axios from "axios"
-const baseUrl = '/api/users'
+const baseUrl = 'https://timewise-backend.vercel.app/api/users'
 
 const addUser = async ( credentials ) => {
     const response = await axios.post(baseUrl, credentials)

@@ -1,41 +1,48 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import audio from '../sounds/task_complete.wav'
 import audio4 from '../sounds/add-task-sound.mp3'
-import audio3 from '../sounds/delete-task-sound.mp3'
+// import audio3 from '../sounds/delete-task-sound.mp3'
 import audio2 from '../sounds/click-21156.mp3'
+import tasksService from '../services/tasks'
 
 const Tasks = ( {dark} ) => {
   const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
 
+  const contentTimer = useRef(null)
+  const progressTimer = useRef(null)
+
+  useEffect(() => {
+    tasksService.getAll()
+        .then(response => {
+            setTasks(response)
+        })
+
+  }, [])
+
   const handleInputChange = (e) => {
     setNewTask(e.target.value)
   }
 
-  const handleAddTask = (input = newTask, index = tasks.length) => {
+  const handleAddTask = async (input = newTask) => {
 
-    console.log(input)
-    console.log(typeof(input))
+    // console.log(input)
+    // console.log(typeof(input))
 
     if (input.trim() !== '') {
-
-        const maxId = tasks.length > 0
-            ? Math.max(...tasks.map(task => Number(task.id))) + 1
-            : 0
-    
+   
         const addedTask = {
             content: input,
             status: false,
-            id: maxId
+            progress: false
         }
+
+        const savedTask = await tasksService.create(addedTask)
+        console.log(savedTask)
         
-        const temp = [...tasks]
-        temp.splice(index, 0, addedTask)
 
-        console.log(temp)
-
-        setTasks(temp)
+        setTasks(tasks.concat({...addedTask, id: savedTask.id}))
         setNewTask('')
 
         console.log(addedTask)
@@ -45,7 +52,9 @@ const Tasks = ( {dark} ) => {
 
   }
 
-  const handleDeleteTask = (id) => {
+  const handleDeleteTask = async (id) => {
+
+    await tasksService.remove(id)
     const updatedTasks = tasks.filter(task => task.id !== id)
     setTasks(updatedTasks)
 
@@ -70,6 +79,16 @@ const Tasks = ( {dark} ) => {
     })
 
     setTasks(updatedTasks)
+    const currTask = tasks.find(task => task.id === id)
+
+    clearTimeout(progressTimer.current)
+    progressTimer.current = setTimeout(() => {
+      tasksService.update(id, {...currTask, status: !currTask.status})
+        .then(response => {
+          console.log(`task ${id} status updated!`)
+        })
+    }, 3000)
+
   }
 
   const handleTaskProgress = (id) => {
@@ -87,6 +106,16 @@ const Tasks = ( {dark} ) => {
     })
 
     setTasks(updatedTasks)
+
+    const currTask = tasks.find(task => task.id === id)
+    clearTimeout(progressTimer.current)
+    progressTimer.current = setTimeout(() => {
+      tasksService.update(id, {...currTask, progress: !currTask.progress})
+        .then(response => {
+          console.log(`task ${id} progress updated!`)
+        })
+    }, 3000)
+
   }
 
   const handleKeyDown = (e) => {
@@ -97,11 +126,19 @@ const Tasks = ( {dark} ) => {
 
   }
 
-  // eventually add a setTimeout to avoid overpinging the database
   const handleTaskEdit = (id, newContent) => {
     const updatedTasks = tasks.map(task => task.id === id ? {...task, content: newContent} : task)
+    const currTask = tasks.find(task => task.id === id)
     setTasks(updatedTasks)
     //console.log(updatedTasks)
+
+    clearTimeout(contentTimer.current)
+    contentTimer.current = setTimeout(() => {
+      tasksService.update(id, {...currTask, content: newContent})
+        .then(response => {
+          console.log(`task ${id} saved!`)
+        })
+    }, 3000)
   }
 
   const handleDragStart = (event, id) => {

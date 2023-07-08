@@ -3,11 +3,106 @@ body,
 #root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   display: flex;
-  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.container.new {
+  justify-content: center;
+}
+
+.logged-out {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logged-out .description {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.logged-out .login-container {
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+}
+
+.logged-out .login-container h2 {
+  margin-bottom: 10px;
+}
+
+.logged-out .login-container p {
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.logged-out .login-container .newUser {
+  font-style: italic;
+  font-size: 75%;
+  color: #c0c0c0;
+  transition: color ease 0.3s
+}
+
+.logged-out .login-container .newUser:hover{
+  color: #888;
+  cursor: pointer;
+}
+
+.logged-out .login-container input {
+  width: 90%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.logged-out .login-container .create-user {
+  background: #beb;
+}
+
+.logged-out .login-container .create-user.short {
+  background: #ebb;
+}
+
+.logged-out .login-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logged-out .login-container button:hover {
+  background-color: #000;
+  color: #fff
+}
+
+.logged-out .error-msg {
+  color: red;
+  margin-top: 10px;
+}
+
+.main-container {
+  display: flex;
+  min-height: 100%;
+  min-width: 100%;
   background-color: #f1f1f1
 }
 
@@ -18,11 +113,15 @@ body,
   color: #F8F8F8;
 }
 
+.logged-out {
+  display: flex;
+  min-height: 100%;
+}
+
 .sidebar {
   width: 40%;
   background-color: #e1e1e1;
   padding: 10px;
-  height: 100%;
 }
 
 .sidebar.dark {
@@ -36,34 +135,13 @@ body,
   text-align: center;
 }
 
-.sidebar .description button {
-  padding: 10px 20px;
-  margin-left: 10px;
-  background-color: #fff;
-  color: #000;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid transparent;
-}
-
-.sidebar .description button:hover {
-  background-color: #000;
-  color: #fff;
-  border: 1px solid black;
-}
-
 .spotify-player {
   position: fixed;
   width: 25%;
   bottom: 10px;
   left: 2%;
   z-index: 10;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,10 +157,8 @@ body,
   text-align: center;
   border-radius: 10px;
   width: 100%;
-  max-height: 70%;
-  margin: 0 auto;
   font-family: Tahoma, Geneva, sans-serif;
-  max-height: calc(100% - 320px);
+  max-height: 500px;
   overflow-y: auto;
 }
 
@@ -93,7 +169,6 @@ body,
   }
   
 }
-
 
 .goals .header {
   background-color: transparent;
@@ -161,7 +236,7 @@ body,
 .goals .goal-list li {
   display: flex;
   margin-bottom: 10px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
   width: 95%
 }
 
@@ -195,20 +270,20 @@ body,
   outline: none;
 }
 
-
 .goals .goal-list.dark .goal-content {
   color: #ddd;
 }
 
 .main-content {
   width: 100%;
-  padding: 10px;
+  height: 100%;
 }
 
 .tasks-grid {
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
+  border-top: 1px solid #E0E0E0;
 }
 
 .timer-container {
@@ -218,7 +293,7 @@ body,
   text-align: center;
   padding-bottom: 5px;
   margin-bottom: 10px;
-  /* border: 1px solid #E0E0E0; */
+  /* border-bottom: 1px solid #E0E0E0; */
   background-color: transparent;
   border-radius: 8px;
 }
@@ -399,7 +474,6 @@ body,
   color: white;
 }
 
-
 .tasks .task-list .task-options {
   position: relative;
   display: inline-block;
@@ -458,4 +532,36 @@ body,
 
 .strikethrough {
   text-decoration: line-through;
+}
+
+.toolbar {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.toolbar button {
+  margin-right: 10px;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+}
+
+.toolbar button:hover {
+  background-color: #333;
+  color: #fff;
+  border: 1px solid black;
+}
+
+.toolbar img {
+  background-color: transparent;
+  width: 20px;
+  height: 20px
 }

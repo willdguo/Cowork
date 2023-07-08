@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import goalsService from '../services/goals' 
 
 
 const Goals = ( {dark} ) => {
@@ -6,35 +7,36 @@ const Goals = ( {dark} ) => {
     const [goals, setGoals] = useState([])
     const [newGoal, setNewGoal] = useState('')
 
+    const contentTimer = useRef(null)
+
+    useEffect(() => {
+        // console.log('rerender goals')
+
+        goalsService.getAll()
+            .then(response => {
+                setGoals(response)
+            })
+
+    }, [])
+
 
     const handleInputChange = (e) => {
         setNewGoal(e.target.value)
     }
 
-    const handleAddGoal = (input = newGoal, index = goals.length) => {
+    const handleAddGoal = async (input = newGoal) => {
 
-        if (input.trim() !== '') {
-    
-            const maxId = goals.length > 0
-                ? Math.max(...goals.map(task => Number(task.id))) + 1
-                : 0
-        
-            const addedGoal = {
-                content: input,
-                id: maxId
+        if (input.trim() !== '') { 
+            const newGoal = {
+                content: input
             }
-            
-            const temp = [...goals]
-            temp.splice(index, 0, addedGoal)
-    
-            //console.log(temp)
-    
-            setGoals(temp)
+
+            const savedGoal = await goalsService.create(newGoal)
+            console.log(savedGoal)
+
+            setGoals(goals.concat({...newGoal, id: savedGoal.id}))
             setNewGoal('')
-    
-            console.log(addedGoal)
         }
-    
     }
 
     const handleKeyDown = (e) => {
@@ -45,13 +47,25 @@ const Goals = ( {dark} ) => {
     
     }
 
-    const handleGoalEdit = (id, e) => {
+    const handleGoalEdit = async (id, e) => {
         const newContent = e.target.value
+        const currGoal = goals.find(goal => goal.id === id)
         const updatedGoals = goals.map(goal => goal.id === id ? {...goal, content: newContent} : goal)
         setGoals(updatedGoals)
+
+        clearTimeout(contentTimer.current)
+        contentTimer.current = setTimeout(() => {
+            goalsService.update(id, {...currGoal, content: newContent})
+                .then(() => {
+                    console.log(`goal ${id} saved!`)
+                })
+        }, 3000)
+
     }
 
-    const handleDeleteGoal = (id) => {
+    const handleDeleteGoal = async (id) => {
+
+        await goalsService.remove(id)
         const updatedGoals = goals.filter(goal => goal.id !== id)
         setGoals(updatedGoals)
     }

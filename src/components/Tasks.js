@@ -6,7 +6,7 @@ import audio2 from '../sounds/click-21156.mp3'
 import tasksService from '../services/tasks'
 
 const Tasks = ( {dark} ) => {
-  const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
+  const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}]) // delete this - keeps bugging out
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
 
@@ -141,6 +141,8 @@ const Tasks = ( {dark} ) => {
     }, 3000)
   }
 
+
+  // save task index - upon refresh, order of tasks may scramble
   const handleDragStart = (event, id) => {
     setDraggedItemId(id)
   }
@@ -153,7 +155,7 @@ const Tasks = ( {dark} ) => {
     
     const targetItem = event.target.closest("li")
     const targetItemId = targetItem.getAttribute("data-task-id")
-    const targetItemIndex = tasks.findIndex(task => task.id === Number(targetItemId))
+    const targetItemIndex = tasks.findIndex(task => task.id === targetItemId)
     
     const targetRect = targetItem.getBoundingClientRect()
     const targetOffset = targetRect.y + targetRect.height / 2
@@ -161,7 +163,7 @@ const Tasks = ( {dark} ) => {
     const moveUp = draggedItemIndex > targetItemIndex && event.clientY < targetOffset
     const moveDown = draggedItemIndex < targetItemIndex && event.clientY > targetOffset
     
-    //console.log(draggedItemIndex, targetItemIndex)
+    console.log(draggedItemIndex, targetItemIndex)
 
     if (moveUp || moveDown) {
       //console.log(moveUp, moveDown)

@@ -41,7 +41,7 @@ const update = (id, obj) => {
     return axios.put(`${baseUrl}/${id}`, obj)
 }
 
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     getAll,
     create,

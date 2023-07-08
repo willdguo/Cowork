@@ -2,6 +2,7 @@ import {useState} from 'react'
 import loginService from '../services/login'
 import userService from '../services/user'
 import goalsService from '../services/goals'
+import tasksService from '../services/tasks'
 
 
 const Login = ( {user, setUser}) => {
@@ -26,6 +27,7 @@ const Login = ( {user, setUser}) => {
         try {
             const user = await loginService.login({ username, password })
             goalsService.setToken(user.token)
+            tasksService.setToken(user.token)
 
             setUser(user)
             setUsername('')
@@ -57,6 +59,7 @@ const Login = ( {user, setUser}) => {
             console.log(newuser)
 
             goalsService.setToken(newuser.token)
+            tasksService.setToken(newuser.token)
             setUser(newuser)
             setUsername('')
             setPassword('')

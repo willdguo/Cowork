@@ -13,15 +13,17 @@ import shareIcon from './icons/share.png'
 function App() {
 
   const [desc, setDesc] = useState('')
+  const [finalDesc, setFinalDesc] = useState('')
   const [dark, setDark] = useState('dark')
   const [user, setUser] = useState(null)
 
   const [spotifyMessage, setSpotifyMessage] = useState(' Sign into Spotify in a separate tab to use the web player.')
+  const spotifyMessageTimer = useRef(null)
 
-  const finalDesc = "Inspired by hours.me"
+  // const finalDesc = "Inspired by hours.me"
   const n = useRef(0)
   const t = useRef(300)
-  const flickers = 6
+  const flickers = 1
 
   const [copied, setCopied] = useState(false)
 
@@ -33,12 +35,23 @@ function App() {
       setUser(savedUser)
       goalsService.setToken(savedUser.token)
       tasksService.setToken(savedUser.token)
+      setFinalDesc(`Welcome, ${savedUser.username}`)
     }
 
-    setTimeout(() => {
-      setSpotifyMessage(null)
-    }, 15000)
   }, [])
+
+  useEffect(() => {
+    console.log('displaying spotify message')
+    clearTimeout(spotifyMessageTimer.current)
+
+    setSpotifyMessage(' Sign into Spotify in a separate tab to use the web player.')
+
+    spotifyMessageTimer.current = setTimeout(() => {
+      setSpotifyMessage(null)
+      console.log('spotify message gone')
+    }, 15000)
+
+  }, [user])
 
 
   useEffect(() => {
@@ -60,7 +73,7 @@ function App() {
 
     return () => clearTimeout(timer)
 
-  }, [desc])
+  }, [desc, finalDesc])
 
   const handleCopyLink = () => {
     const linkToCopy = 'https://workspace-kappa.vercel.app/'
@@ -100,11 +113,11 @@ function App() {
       <div className = {`sidebar ${dark}`}>
           
         <div className = "description">
-          <h1> TimeWise </h1>
+          {/* <h1> TimeWise </h1> */}
   
-          <p style = {{whiteSpace: 'pre-line'}}> <i> {desc} </i> </p>
-
-          <p> Welcome, {user.username} </p>
+          <h2 style = {{whiteSpace: 'pre-line'}}> 
+            <i> {desc} </i> 
+          </h2>
           
         </div>
   
@@ -154,7 +167,7 @@ function App() {
       <div className = {`description`}>
         <h1> TimeWise </h1>
 
-        <p style = {{whiteSpace: 'pre-line'}}> <i> {desc} </i> </p>
+        {/* <p> Inspired by hours.me </p> */}
         
       </div>
 

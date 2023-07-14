@@ -74,7 +74,7 @@ const Goals = ( {dark} ) => {
         <div className = "goals"> 
 
             <div className = {`header ${dark}`}>
-                <h1> Goals </h1>
+                <h1> My Goals </h1>
 
                 <input
                     type="text"

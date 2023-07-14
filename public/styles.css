@@ -19,6 +19,21 @@ body,
   justify-content: center;
 }
 
+.main-container {
+  display: flex;
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #f1f1f1
+}
+
+.dark {
+  background-color: #111;
+  /* background-color: #202225; */
+  /* background-color: #2f3136; */
+  /* background-color: #202225; */
+  color: #F8F8F8;
+}
+
 .logged-out {
   margin-top: 20px;
   display: flex;
@@ -99,20 +114,6 @@ body,
   margin-top: 10px;
 }
 
-.main-container {
-  display: flex;
-  min-height: 100%;
-  min-width: 100%;
-  background-color: #f1f1f1
-}
-
-.dark {
-  background-color: #202225;
-  /* background-color: #2f3136; */
-  /* background-color: #202225; */
-  color: #F8F8F8;
-}
-
 .logged-out {
   display: flex;
   min-height: 100%;
@@ -120,19 +121,29 @@ body,
 
 .sidebar {
   width: 40%;
-  background-color: #e1e1e1;
+  background: linear-gradient(to bottom, /*2f 31 36 */
+    rgba(241, 241, 241, 1),
+    rgba(200, 200, 200, 1) 80%
+  );
   padding: 10px;
 }
 
 .sidebar.dark {
-  background-color: #2f3136;
+  background: linear-gradient(to top, /*2f 31 36 */
+    rgba(47, 49, 54, 1),
+    rgba(16, 16, 16, 1) 80%
+  );
 }
 
 .sidebar .description {
-  border: 1px solid white;
+  /* border: 1px solid white; */
   border-radius: 10px;
   padding: 5px;
   text-align: center;
+}
+
+.sidebar .description:hover {
+  border: 1px solid white;
 }
 
 .spotify-player {
@@ -153,7 +164,12 @@ body,
   border: none;
 }
 
+.spotify-player p {
+  font-size: 75%;
+}
+
 .goals {
+  /* border: 1px solid white; */
   text-align: center;
   border-radius: 10px;
   width: 100%;
@@ -189,18 +205,19 @@ body,
 
 .goals .header button {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
-  color: #fff;
-  background-color: #66bb6a;
+  color: #444;
+  background-color: transparent;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .goals .header button:hover {
-  background-color: #81c784;
+  /* background-color: #fff; */
+  color: #fff;
 }
 
 .goals .header input {
@@ -241,21 +258,21 @@ body,
 }
 
 .goals .goal-list .delete-button {
-  background-color: #EE4747;
-  color: #FFFFFF;
+  background-color: transparent;
+  color: #888;
   border: none;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
   height: 30px;
   /* consider making delete button css universal*/
 }
 
 .goals .goal-list .delete-button:hover {
-  background-color: #d00
+  color: #e44
 }
 
 .goals .goal-list .goal-content {
@@ -329,17 +346,29 @@ body,
   font-weight: bold;
 }
 
+
 .timer-container .timer-customize {
   margin: 10px 0 0 10%;  
 }
 
 .timer-container .timer-customize input {
   padding: 10px;
-  font-size: 16px;
-  border: 1px solid #E0E0E0;
-  border-radius: 4px;
+  font-size: 20px;
+  color: #b0b0b0;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #E0E0E0;
   margin-bottom: 10px;
+  font-style: italic;
 }
+
+.timer-container .timer-customize input:focus {
+  color: #e0e0e0;
+  outline: none;
+  font-style: normal;
+  opacity: 100%;
+}
+
 
 .timer-container .timer-customize.dark button:hover {
   background-color: #000;
@@ -367,18 +396,19 @@ body,
 
 .tasks .header button {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: bold;
-  color: #fff;
-  background-color: #66bb6a;
+  color: #888;
+  background-color: transparent;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .tasks .header button:hover{
-  background-color: #81c784;
+  /* background-color: #fff; */
+  color: #fff;
 }
 
 .tasks .header input {
@@ -434,17 +464,21 @@ body,
 }
 
 .tasks .task-list .progress {
-  background-color: #AFD5AA;
+  background-color: #AFF5AA;
   border-radius: 5px;
 }
 
 .tasks .task-list .progress.dark {
-  background-color: #4D6E8A;
+  background-color: #0ef;
+}
+
+.tasks .task-list .progress.dark input {
+  color: #000;
 }
 
 
 .tasks .task-list .delete-button {
-  background-color: #EE4747;
+  background-color: #ee6767;
   color: #FFFFFF;
   border: none;
   padding: 6px 14px;
@@ -504,6 +538,7 @@ body,
   border-radius: 5px;
   cursor: pointer;
   padding: 5px 10px;
+  margin-bottom: 5px;
   display: block;
   width: 100%;
   transition: background-color 0.1s ease;
@@ -514,7 +549,7 @@ body,
 }
 
 .tasks .task-list .task-options .show-options {
-  background-color: #A9A9A9;
+  background-color: transparent;
   color: #FFFFFF;
   border: none;
   padding: 6px 14px;
@@ -544,7 +579,7 @@ body,
   margin-right: 10px;
   background-color: #fff;
   color: #000;
-  border: none;
+  border: 1px solid #aaa;
   border-radius: 4px;
   font-size: 16px;
   font-weight: bold;
@@ -555,7 +590,7 @@ body,
 }
 
 .toolbar button:hover {
-  background-color: #333;
+  background-color: #222;
   color: #fff;
   border: 1px solid black;
 }

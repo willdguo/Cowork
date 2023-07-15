@@ -156,6 +156,7 @@ body,
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .spotify-player iframe {
@@ -164,8 +165,30 @@ body,
   border: none;
 }
 
-.spotify-player p {
-  font-size: 75%;
+.spotify-player #spotify-login {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  width: 50%;
+  height: 30px;
+  padding: 10px;
+  background-color: #111;
+  text-decoration: none;
+  border-radius: 10px;
+  border: 1px solid #222;
+  transition: all 0.3s ease;
+}
+
+.spotify-player #spotify-login:hover {
+  cursor: pointer;
+  background-color: #20212c;
+}
+
+.spotify-player #spotify-login span {
+  font-family: inherit;
+  color: #ccc;
+  text-decoration: none;
+  padding: 5px;
 }
 
 .goals {
@@ -257,24 +280,6 @@ body,
   width: 95%
 }
 
-.goals .goal-list .delete-button {
-  background-color: transparent;
-  color: #888;
-  border: none;
-  padding: 6px 14px;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  height: 30px;
-  /* consider making delete button css universal*/
-}
-
-.goals .goal-list .delete-button:hover {
-  color: #e44
-}
-
 .goals .goal-list .goal-content {
   border: none;
   background-color: transparent;
@@ -289,6 +294,54 @@ body,
 
 .goals .goal-list.dark .goal-content {
   color: #ddd;
+}
+
+.goals .goal-list .goal-options {
+  position: relative;
+  display: inline-block;
+}
+
+.goals .goal-list .goal-options .goal-options-container {
+  z-index: 1;
+  position: absolute;
+  text-align: left;
+  top: 50%;
+  left: 0%;
+  opacity: 0;
+  width: 40px;
+  background-color: transparent;
+  border-radius: 4px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s ease;
+}
+
+.goals .goal-list .goal-options:hover .goal-options-container {
+  display: block;
+  opacity: 1;
+}
+
+.goals .goal-list .goal-options .show-options {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.goals .goal-list .goal-options .delete-button {
+  background-color : #ee6767;
+  border-radius: 4px;
+  padding: 5px;
+  color: #ddd;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.goals .goal-list .goal-options .delete-button:hover {
+  background-color: #b44;
+  cursor:pointer;
 }
 
 .main-content {
@@ -460,7 +513,10 @@ body,
 
 .tasks .task-list li input[type = "checkbox"] {
   background-color: transparent;
+  width: 20px;
+  height: 20px;
   margin-right: 10px;
+  /* clip-path: circle(25% at 50% 50%) */
 }
 
 .tasks .task-list .progress {
@@ -512,6 +568,7 @@ body,
   position: relative;
   display: inline-block;
 }
+
 
 .tasks .task-list .task-options .task-options-container {
   z-index: 1;

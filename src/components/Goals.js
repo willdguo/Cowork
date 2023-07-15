@@ -92,7 +92,16 @@ const Goals = ( {dark} ) => {
                     {goals.map(goal => (
                         <li key = {goal.id}>
                             <input className = "goal-content" value = {goal.content} onChange = {event => handleGoalEdit(goal.id, event)}/>
-                            <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> - </button>
+                            
+                            <div className="goal-options">
+                                <button className = "show-options"> ... </button>
+
+                                <div className="goal-options-container">
+                                    <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> Delete </button>
+                                </div>
+
+                            </div>
+                            {/* <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> - </button> */}
                         </li>
                     ))}
                 </ul>

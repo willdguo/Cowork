@@ -9,6 +9,7 @@ import tasksService from './services/tasks'
 import darkIcon from './icons/light.png'
 import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
+import Spotify from './components/Spotify'
 
 function App() {
 
@@ -17,10 +18,6 @@ function App() {
   const [dark, setDark] = useState('dark')
   const [user, setUser] = useState(null)
 
-  const [spotifyMessage, setSpotifyMessage] = useState(' Sign into Spotify in a separate tab to use the web player.')
-  const spotifyMessageTimer = useRef(null)
-
-  // const finalDesc = "Inspired by hours.me"
   const n = useRef(0)
   const t = useRef(300)
   const flickers = 1
@@ -35,21 +32,17 @@ function App() {
       setUser(savedUser)
       goalsService.setToken(savedUser.token)
       tasksService.setToken(savedUser.token)
-      setFinalDesc(`Welcome, ${savedUser.username}`)
     }
 
   }, [])
 
   useEffect(() => {
-    console.log('displaying spotify message')
-    clearTimeout(spotifyMessageTimer.current)
 
-    setSpotifyMessage(' Sign into Spotify in a separate tab to use the web player.')
-
-    spotifyMessageTimer.current = setTimeout(() => {
-      setSpotifyMessage(null)
-      console.log('spotify message gone')
-    }, 15000)
+    if(user){
+      setFinalDesc(`Welcome, ${user.username}`)
+      setDesc('')
+      n.current = 0
+    }
 
   }, [user])
 
@@ -66,7 +59,7 @@ function App() {
       } else if (n.current - flickers <= finalDesc.length){
         setDesc(finalDesc.substring(0, n.current - flickers) + ' \u00A0')
       } else if (n.current - 2 * flickers <= finalDesc.length) {
-        setDesc(`${finalDesc} ${['|', '\u00A0'][n.current % 2]}`)
+        setDesc(`${finalDesc} ${[' ', '\u00A0'][n.current % 2]}`)
       }
 
     }, t.current)
@@ -122,22 +115,7 @@ function App() {
         </div>
   
         <Goals dark = {dark} />
-  
-        <div className = "spotify-player">
-          <p> {spotifyMessage} </p>
-                
-          <iframe 
-              src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" 
-              allowtransparency = "true" 
-              allow = "encrypted-media" 
-              title = "Peaceful Piano"
-          />
-
-        </div> 
-
-        <div id = "embed-iframe">
-
-        </div>
+        <Spotify />
   
       </div>
 

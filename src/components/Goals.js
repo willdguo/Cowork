@@ -7,6 +7,9 @@ const Goals = ( {dark} ) => {
     const [goals, setGoals] = useState([])
     const [newGoal, setNewGoal] = useState('')
 
+    const [draggedItemId, setDraggedItemId] = useState(-1)
+
+
     const contentTimer = useRef(null)
 
     useEffect(() => {
@@ -69,6 +72,43 @@ const Goals = ( {dark} ) => {
         const updatedGoals = goals.filter(goal => goal.id !== id)
         setGoals(updatedGoals)
     }
+
+    const handleDragStart = (event, id) => {
+        setDraggedItemId(id)
+    }
+      
+    const handleDragOver = (event) => {
+    
+        event.preventDefault()
+      
+        const draggedItemIndex = goals.findIndex(goal => goal.id === draggedItemId)
+        
+        const targetItem = event.target.closest("li")
+        const targetItemId = targetItem.getAttribute("data-goal-id")
+        const targetItemIndex = goals.findIndex(goal => goal.id === targetItemId)
+        
+        const targetRect = targetItem.getBoundingClientRect()
+        const targetOffset = targetRect.y + targetRect.height / 2
+        
+        const moveUp = draggedItemIndex > targetItemIndex && event.clientY < targetOffset
+        const moveDown = draggedItemIndex < targetItemIndex && event.clientY > targetOffset
+        
+        console.log(draggedItemIndex, targetItemIndex)
+    
+        if (moveUp || moveDown) {
+          //console.log(moveUp, moveDown)
+    
+          const updatedGoals = [...goals]
+          const [draggedItem] = updatedGoals.splice(draggedItemIndex, 1)
+          updatedGoals.splice(targetItemIndex, 0, draggedItem)
+          setGoals(updatedGoals)
+        }
+    
+    }
+      
+    const handleDrop = (event, id) => {
+        event.preventDefault()
+    }
     
     return (
         <div className = "goals"> 
@@ -90,7 +130,11 @@ const Goals = ( {dark} ) => {
             <div className = {`goal-list ${dark}`}>
                 <ul>
                     {goals.map(goal => (
-                        <li key = {goal.id}>
+                        <li key = {goal.id} data-goal-id = {goal.id} draggable = "true"
+                            onDragStart = {event => handleDragStart(event, goal.id)} 
+                            onDragOver = {event => handleDragOver(event, goal.id)} 
+                            onDrop = {event => handleDrop(event, goal.id)}
+                        >
                             <input className = "goal-content" value = {goal.content} onChange = {event => handleGoalEdit(goal.id, event)}/>
                             
                             <div className="goal-options">

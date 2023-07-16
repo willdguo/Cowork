@@ -13,6 +13,8 @@ const Tasks = ( {dark} ) => {
   const contentTimer = useRef(null)
   const progressTimer = useRef(null)
 
+  const [tasksTitle, setTasksTitle] = useState('')
+
   useEffect(() => {
     tasksService.getAll()
         .then(response => {
@@ -83,7 +85,7 @@ const Tasks = ( {dark} ) => {
 
     clearTimeout(progressTimer.current)
     progressTimer.current = setTimeout(() => {
-      tasksService.update(id, {...currTask, status: !currTask.status})
+      tasksService.update(id, {...currTask, status: !currTask.status, progress: false})
         .then(response => {
           console.log(`task ${id} status updated!`)
         })
@@ -179,6 +181,10 @@ const Tasks = ( {dark} ) => {
   const handleDrop = (event, id) => {
     event.preventDefault()
   }
+
+  const handleTasksTitle = (e) => {
+    setTasksTitle(e.target.value)
+  }
   
 
   return (
@@ -187,9 +193,10 @@ const Tasks = ( {dark} ) => {
 
         <div className = {`header ${dark}`}>
 
-            <h1> To-Do List </h1>
+            <input className = 'tasks-title' value = {tasksTitle} onChange = {handleTasksTitle} placeholder = "To-do List"/>
 
             <input
+                className = 'add-task'
                 type="text"
                 value = {newTask}
                 onChange = {handleInputChange}

@@ -120,16 +120,17 @@ body,
 }
 
 .sidebar {
-  width: 40%;
-  background: linear-gradient(to bottom, /*2f 31 36 */
+  width: 30%;
+  background: linear-gradient(to bottom,
     rgba(241, 241, 241, 1),
     rgba(200, 200, 200, 1) 80%
   );
   padding: 10px;
+  border-right: 1px solid #000
 }
 
 .sidebar.dark {
-  background: linear-gradient(to top, /*2f 31 36 */
+  background: linear-gradient(to top,
     rgba(47, 49, 54, 1),
     rgba(16, 16, 16, 1) 80%
   );
@@ -149,18 +150,16 @@ body,
 .spotify-player {
   position: fixed;
   width: 25%;
+  left: 0%;
   bottom: 10px;
-  left: 2%;
   z-index: 10;
-  /* margin-top: 20px; */
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .spotify-player iframe {
-  width: 100%;
+  width: 80%;
   height: 80px;
   border: none;
 }
@@ -192,11 +191,11 @@ body,
 }
 
 .goals {
-  /* border: 1px solid white; */
+  /* border: 1px solid #222; */
   text-align: center;
   border-radius: 10px;
   width: 100%;
-  font-family: Tahoma, Geneva, sans-serif;
+  font-family: inherit;
   max-height: 500px;
   overflow-y: auto;
 }
@@ -224,6 +223,7 @@ body,
 
 .goals .header.dark input::placeholder{
   color: #bbb;
+  font-family: inherit;
 }
 
 .goals .header button {
@@ -276,8 +276,12 @@ body,
 .goals .goal-list li {
   display: flex;
   margin-bottom: 10px;
-  /* margin-left: 5px; */
-  width: 95%
+  width: 95%;
+  border-bottom: 1px solid #ccc;
+}
+
+.goals .goal-list.dark li {
+  border-bottom: 1px solid #222;
 }
 
 .goals .goal-list .goal-content {
@@ -353,7 +357,7 @@ body,
   display: flex;
   flex-wrap: wrap;
   max-width: 100%;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid #222;
 }
 
 .timer-container {
@@ -440,11 +444,14 @@ body,
   border-radius: 10px;
   margin: 10px;
   width: 30%;
-  font-family: Tahoma, Geneva, sans-serif;
+  font-family: inherit;
 }
 
 .tasks .header {
+  font-family: inherit;
   border-bottom: 1px solid black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .tasks .header button {
@@ -464,7 +471,8 @@ body,
   color: #fff;
 }
 
-.tasks .header input {
+.tasks .header .add-task {
+  font-family: inherit;
   padding: 6px 12px;
   font-size: 14px;
   color: #333;
@@ -475,12 +483,12 @@ body,
   border: none;
 }
 
-.tasks .header input::placeholder {
+.tasks .header .add-task::placeholder {
   color: #999;
   font-style: italic;
 }
 
-.tasks .header input:focus {
+.tasks .header .add-task:focus {
   outline: none;
 }
 
@@ -488,27 +496,64 @@ body,
   border-bottom: 1px solid white;
 }
 
-.tasks .header.dark input {
+.tasks .header.dark .add-task {
   color: #eee;
 }
 
-.tasks .header.dark input::placeholder {
+.tasks .header.dark .add-task::placeholder {
   color: #bbb;
 }
 
+.tasks .header .tasks-title {
+  font-family: inherit;
+  width: 80%;
+  background-color: transparent;
+  font-size: 32px;
+  text-align: center;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 8px;
+  color: #000;
+}
+
+.tasks .header.dark .tasks-title::placeholder {
+  color: #e0e0e0;
+}
+
+.tasks .header.dark .tasks-title {
+  color: #e0e0e0;
+}
+
+.tasks .header .tasks-title:focus {
+  outline: none;
+  font-style: italic;
+}
+
+.tasks .header .tasks-title::placeholder {
+  color: #000;
+}
+
 .tasks .task-list ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: left;
+  font-family: inherit;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
 }
 
 .tasks .task-list li {
+  font-family: inherit;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   margin-left: 5px;
-  padding-right: 5px;
-  width: 95%;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.tasks .task-list li.dark {
+  border-bottom: 1px solid #333
 }
 
 .tasks .task-list li input[type = "checkbox"] {
@@ -516,16 +561,15 @@ body,
   width: 20px;
   height: 20px;
   margin-right: 10px;
-  /* clip-path: circle(25% at 50% 50%) */
 }
 
 .tasks .task-list .progress {
-  background-color: #AFF5AA;
+  background-color: #9FE59A;
   border-radius: 5px;
 }
 
 .tasks .task-list .progress.dark {
-  background-color: #0ef;
+  background-color: #0ed;
 }
 
 .tasks .task-list .progress.dark input {
@@ -550,9 +594,9 @@ body,
 }
 
 .tasks .task-list .task-content {
+  font-family: inherit;
   border: none;
   background-color: transparent;
-  font-family: inherit;
   font-size: inherit;
   margin: 10px;
   width: 80%;

@@ -140,18 +140,7 @@ function App() {
   )
 
   const login = () => (
-    <div className = {`logged-out`}>
-
-      <div className = {`description`}>
-        <h1> TimeWise </h1>
-
-        {/* <p> Inspired by hours.me </p> */}
-        
-      </div>
-
       <Login user = {user} setUser = {setUser} />
-
-    </div>
   )
 
   return (

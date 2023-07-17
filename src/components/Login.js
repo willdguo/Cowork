@@ -85,55 +85,66 @@ const Login = ( {user, setUser}) => {
 
     const loginForm = () => (
 
-        <div className = "login-container">
-            <h2> Sign In </h2>
+        <div className = {`logged-out`}>
 
-            <p> Username </p>
-            <input value = {username} 
-                onChange = {handleUsername}
-                onKeyDown = {(e) => {if(e.key === 'Enter'){handleLogin()}}}    
-            />
+            {/* <div className = {`samples`}>
+                <img src = {sample1} alt = "sample task board"/>
+            </div> */}
 
-            <p>Password</p>
-            <input value = {password} type = 'password' 
-                onChange = {handlePassword}
-                onKeyDown = {(e) => {if(e.key === 'Enter'){handleLogin()}}}
-            />
+            <div className = "login-container">
+                <h1> TimeWise </h1>
 
-            <button onClick = {handleLogin}> Submit </button>
+                <input value = {username} placeholder = "Username"
+                    onChange = {handleUsername}
+                    onKeyDown = {(e) => {if(e.key === 'Enter'){handleLogin()}}}    
+                />
 
-            <p className = 'newUser' onClick = {() => setNewuser(!newuser)}> New User? </p>
+                <input value = {password} type = 'password' placeholder = "Password"
+                    onChange = {handlePassword}
+                    onKeyDown = {(e) => {if(e.key === 'Enter'){handleLogin()}}}
+                />
 
-            <div className = "error-msg">
-                {errorMessage}
+                <button onClick = {handleLogin}> Log in </button>
+
+                <p className = 'newUser' onClick = {() => setNewuser(!newuser)}> New User? </p>
+
+                <div className = "error-msg">
+                    {errorMessage}
+                </div>
+
             </div>
 
         </div>
+
     )
 
     const newUserForm = () => (
-        <div className = "login-container">
-            <h2> Create Account </h2>
+        <div className = "logged-out">
 
-            <p> Username </p>
-            <input className = {`create-user ${username.length < 3 ? 'short' : ''}`} value = {username} 
-                onChange = {handleUsername} 
-                onKeyDown = {(e) => {if(e.key === 'Enter'){handleCreateUser()}}}
-            />
+            <div className = "login-container">
+                <h1> Create Account </h1>
 
-            <p> Password </p>
-            <input className = {`create-user ${password.length < 3 ? 'short' : ''}`} value = {password} type = 'password' 
-                onChange = {handlePassword} 
-                onKeyDown = {(e) => {if(e.key === 'Enter'){handleCreateUser()}}}
-            />
+                {/* <p> Username </p> */}
+                <input className = {`create-user ${username.length < 3 ? 'short' : ''}`} placeholder = "Username" value = {username} 
+                    onChange = {handleUsername} 
+                    onKeyDown = {(e) => {if(e.key === 'Enter'){handleCreateUser()}}}
+                />
 
-            <button onClick = {handleCreateUser}> Submit </button>
+                {/* <p> Password </p> */}
+                <input className = {`create-user ${password.length < 8 ? 'short' : ''}`} placeholder = "Password" value = {password} type = 'password' 
+                    onChange = {handlePassword} 
+                    onKeyDown = {(e) => {if(e.key === 'Enter'){handleCreateUser()}}}
+                />
 
-            <p className = 'newUser' onClick = {() => setNewuser(!newuser)}> Log In </p>
+                <button onClick = {handleCreateUser}> Create account </button>
 
-            <div className = "error-msg">
-                {errorMessage}
+                <p className = 'newUser' onClick = {() => setNewuser(!newuser)}> Log In </p>
+
+                <div className = "error-msg">
+                    {errorMessage}
+                </div>
             </div>
+
         </div>
     )
 

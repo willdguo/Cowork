@@ -227,7 +227,7 @@ const Tasks = ( {dark} ) => {
                       />
 
                       <div className="task-options">
-                        <button className = "show-options"> ... </button>
+                        <button className = "show-options"> {task.progress ? 'IN PROGRESS' : '...'} </button>
 
                         <div className="task-options-container">
                           <button className="task-option-button" onClick={() => handleTaskProgress(task.id)}> {task.progress ? 'Remove ' : 'Set In '} Progress </button>

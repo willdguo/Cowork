@@ -6,8 +6,8 @@ const Spotify = () => {
     const [spotifyToken, setSpotifyToken] = useState('')
 
     const authEndpoint = "https://accounts.spotify.com/authorize"
-    const redirectUrl = "http://localhost:3000"
-    // const redirectUrl = "https://workspace-kappa.vercel.app/"
+    // const redirectUrl = "http://localhost:3000"
+    const redirectUrl = "https://workspace-kappa.vercel.app/"
     const clientId = "9e05855fbe59494684ca6ebeb562e6c2"
     const scopes = [
         "user-read-currently-playing",

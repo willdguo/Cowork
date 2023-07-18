@@ -6,7 +6,7 @@ import audio2 from '../sounds/click-21156.mp3'
 import tasksService from '../services/tasks'
 
 const Tasks = ( {dark} ) => {
-  const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}]) // delete this - keeps bugging out
+  const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
 
@@ -14,6 +14,9 @@ const Tasks = ( {dark} ) => {
   const progressTimer = useRef(null)
 
   const [tasksTitle, setTasksTitle] = useState('')
+
+  const taskListRef = useRef(null)
+
 
   useEffect(() => {
     tasksService.getAll()
@@ -152,6 +155,18 @@ const Tasks = ( {dark} ) => {
   const handleDragOver = (event) => {
 
     event.preventDefault()
+
+    /* testing! */
+    const taskListElement = taskListRef.current;
+    const taskListRect = taskListElement.getBoundingClientRect();
+    const mouseY = event.clientY;
+
+    if (mouseY < taskListRect.top + 20) {
+      taskListElement.scrollTop -= 10; // Scroll up
+    } else if (mouseY > taskListRect.bottom - 20) {
+      taskListElement.scrollTop += 10; // Scroll down
+    }
+    /* testing! */
   
     const draggedItemIndex = tasks.findIndex(task => task.id === draggedItemId)
     
@@ -165,11 +180,9 @@ const Tasks = ( {dark} ) => {
     const moveUp = draggedItemIndex > targetItemIndex && event.clientY < targetOffset
     const moveDown = draggedItemIndex < targetItemIndex && event.clientY > targetOffset
     
-    console.log(draggedItemIndex, targetItemIndex)
+    // console.log(draggedItemIndex, targetItemIndex)
 
     if (moveUp || moveDown) {
-      //console.log(moveUp, moveDown)
-
       const updatedTasks = [...tasks]
       const [draggedItem] = updatedTasks.splice(draggedItemIndex, 1)
       updatedTasks.splice(targetItemIndex, 0, draggedItem)
@@ -210,7 +223,7 @@ const Tasks = ( {dark} ) => {
 
         <div className = "task-list">
 
-          <ul>
+          <ul ref = {taskListRef}>
               {tasks.map(task => (
 
                   <li key = {task.id} data-task-id = {task.id} className = {`${dark} ${task.progress ? "progress" : ""}`} draggable = "true" 

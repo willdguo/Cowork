@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import audio from '../sounds/task_complete.wav'
 import audio4 from '../sounds/add-task-sound.mp3'
-// import audio3 from '../sounds/delete-task-sound.mp3'
 import audio2 from '../sounds/click-21156.mp3'
 import tasksService from '../services/tasks'
 
-const Tasks = ( {dark} ) => {
+const Tasks = ( {dark, user, socket} ) => {
   const [tasks, setTasks] = useState([{content: "You can edit this task!", status: false, progress: false, id: 0}])
   const [newTask, setNewTask] = useState('')
   const [draggedItemId, setDraggedItemId] = useState(-1)
@@ -32,9 +31,6 @@ const Tasks = ( {dark} ) => {
 
   const handleAddTask = async (input = newTask) => {
 
-    // console.log(input)
-    // console.log(typeof(input))
-
     if (input.trim() !== '') {
    
         const addedTask = {
@@ -53,6 +49,8 @@ const Tasks = ( {dark} ) => {
         console.log(addedTask)
 
         new Audio(audio2).play()
+
+        socket.emit("new_task", {...addedTask, username: user.username})
     }
 
   }
@@ -63,6 +61,7 @@ const Tasks = ( {dark} ) => {
     const updatedTasks = tasks.filter(task => task.id !== id)
     setTasks(updatedTasks)
 
+    socket.emit("deleted_task", {username: user.username, id: id})
     new Audio(audio2).play()
   }
 
@@ -85,6 +84,8 @@ const Tasks = ( {dark} ) => {
 
     setTasks(updatedTasks)
     const currTask = tasks.find(task => task.id === id)
+    socket.emit("status_task", {...currTask, status: !currTask.status, progress: false, username: user.username})
+
 
     clearTimeout(progressTimer.current)
     progressTimer.current = setTimeout(() => {
@@ -113,6 +114,8 @@ const Tasks = ( {dark} ) => {
     setTasks(updatedTasks)
 
     const currTask = tasks.find(task => task.id === id)
+    socket.emit("progress_task", {...currTask, progress: !currTask.progress, username: user.username})
+
     clearTimeout(progressTimer.current)
     progressTimer.current = setTimeout(() => {
       tasksService.update(id, {...currTask, progress: !currTask.progress})
@@ -135,7 +138,8 @@ const Tasks = ( {dark} ) => {
     const updatedTasks = tasks.map(task => task.id === id ? {...task, content: newContent} : task)
     const currTask = tasks.find(task => task.id === id)
     setTasks(updatedTasks)
-    //console.log(updatedTasks)
+
+    socket.emit("edited_task", {...currTask, content: newContent, username: user.username})
 
     clearTimeout(contentTimer.current)
     contentTimer.current = setTimeout(() => {

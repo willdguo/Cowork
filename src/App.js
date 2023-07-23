@@ -33,16 +33,28 @@ function App() {
     socket.on("joined_room", (data) => {
       const test = coworkers.find(coworker => coworker.username.toString() === data.username.toString())
 
-      console.log(test)
-      console.log(test === undefined)
-      console.log(data.username)
-
       if(user !== null && user.username !== data.username && test === undefined){ // test === undefined false but still passes
-        console.log('nice new user ')
-        console.log(data)
+        // console.log('nice new user ')
+        // console.log(data)
         setCoworkers(coworkers.concat(data))
       }
 
+    })
+
+    socket.on("joined_room_coworkers", (data) => {
+      console.log("past coworkers:")
+      console.log(data)
+
+      if(user !== null){
+        let temp = data.filter(coworker => coworker.username !== user.username)
+        setCoworkers(temp)
+      }
+
+    })
+
+    socket.on("left_room_coworker", (data) => {
+      console.log(`${data.username} left`)
+      setCoworkers(coworkers.filter(coworker => coworker.username !== data.username))
     })
   }, [user, coworkers])
 
@@ -54,8 +66,6 @@ function App() {
       setUser(savedUser)
       goalsService.setToken(savedUser.token)
       tasksService.setToken(savedUser.token)
-
-      socket.emit("join_room", {...savedUser}) // DONT SHARE THE TOKEN LOL
     }
   }, [])
 
@@ -65,6 +75,9 @@ function App() {
       setFinalDesc(`Welcome, ${user.username}`)
       setDesc('')
       n.current = 0
+
+
+      socket.emit("join_room", {...user, token: null})
     }
 
   }, [user])
@@ -119,6 +132,8 @@ function App() {
 
   const logout = () => {
     setUser(null)
+    setCoworkers([])
+    socket.emit("logout")
     window.localStorage.clear()
   }
 
@@ -146,10 +161,11 @@ function App() {
         <Timer dark = {dark} />
 
         <div className = "tasks-grid">
-          <Tasks dark = {dark} />
+          <Tasks dark = {dark} user = {user} socket = {socket}/>
+
           {coworkers.map(coworker => (
-              <CoworkerTasks username = {coworker.username} dark = {dark} />
-            ))}
+              <CoworkerTasks key = {coworker.username} username = {coworker.username} dark = {dark} socket = {socket} />
+          ))}
 
         </div>
       </div>

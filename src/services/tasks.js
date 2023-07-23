@@ -18,6 +18,15 @@ const getAll = async () => {
     return response.data
 }
 
+const getFromUser = async (username) => {
+    const config = {
+        headers: {Authorization: token}
+    }
+
+    const response = await axios.get(`${baseUrl}/${username}`)
+    return response.data
+}
+
 const create = async ( newObj ) => {
     const config = {
         headers: {Authorization: token}
@@ -48,5 +57,6 @@ export default {
     create,
     setToken,
     remove,
-    update
+    update,
+    getFromUser
 }

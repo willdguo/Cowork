@@ -4,6 +4,7 @@ import Timer from './components/Timer'
 import Tasks from './components/Tasks'
 import Goals from './components/Goals'
 import Login from './components/Login'
+import CoworkerTasks from './components/CoworkerTasks'
 import goalsService from './services/goals'
 import tasksService from './services/tasks'
 import darkIcon from './icons/light.png'
@@ -30,17 +31,20 @@ function App() {
 
   useEffect(() => {
     socket.on("joined_room", (data) => {
+      const test = coworkers.find(coworker => coworker.username.toString() === data.username.toString())
 
-      if(!coworkers.includes(data)){
+      console.log(test)
+      console.log(test === undefined)
+      console.log(data.username)
+
+      if(user !== null && user.username !== data.username && test === undefined){ // test === undefined false but still passes
         console.log('nice new user ')
         console.log(data)
         setCoworkers(coworkers.concat(data))
       }
 
-      console.log(coworkers.length)
-
     })
-  }, [coworkers])
+  }, [user, coworkers])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -118,6 +122,7 @@ function App() {
     window.localStorage.clear()
   }
 
+
   const main = () => (
 
     <div className = {`main-container ${dark}`}>
@@ -125,7 +130,6 @@ function App() {
       <div className = {`sidebar ${dark}`}>
           
         <div className = "description">
-          {/* <h1> TimeWise </h1> */}
   
           <h2 style = {{whiteSpace: 'pre-line'}}> 
             <i> {desc} </i> 
@@ -144,10 +148,9 @@ function App() {
         <div className = "tasks-grid">
           <Tasks dark = {dark} />
           {coworkers.map(coworker => (
-              <div> 
-                <p onClick = {() => console.log(coworkers)}> {coworker.username} </p>
-              </div>
+              <CoworkerTasks username = {coworker.username} dark = {dark} />
             ))}
+
         </div>
       </div>
 

@@ -10,6 +10,9 @@ import darkIcon from './icons/light.png'
 import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
 import Spotify from './components/Spotify'
+import { io } from 'socket.io-client'
+
+const socket = io.connect("http://localhost:3001")
 
 function App() {
 
@@ -17,12 +20,27 @@ function App() {
   const [finalDesc, setFinalDesc] = useState('')
   const [dark, setDark] = useState('dark')
   const [user, setUser] = useState(null)
+  const [coworkers, setCoworkers] = useState([])
 
   const n = useRef(0)
   const t = useRef(300)
   const flickers = 1
 
   const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    socket.on("joined_room", (data) => {
+
+      if(!coworkers.includes(data)){
+        console.log('nice new user ')
+        console.log(data)
+        setCoworkers(coworkers.concat(data))
+      }
+
+      console.log(coworkers.length)
+
+    })
+  }, [coworkers])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedUser')
@@ -32,8 +50,9 @@ function App() {
       setUser(savedUser)
       goalsService.setToken(savedUser.token)
       tasksService.setToken(savedUser.token)
-    }
 
+      socket.emit("join_room", {...savedUser}) // DONT SHARE THE TOKEN LOL
+    }
   }, [])
 
   useEffect(() => {
@@ -124,6 +143,11 @@ function App() {
 
         <div className = "tasks-grid">
           <Tasks dark = {dark} />
+          {coworkers.map(coworker => (
+              <div> 
+                <p onClick = {() => console.log(coworkers)}> {coworker.username} </p>
+              </div>
+            ))}
         </div>
       </div>
 

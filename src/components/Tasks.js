@@ -156,7 +156,6 @@ const Tasks = ( {dark} ) => {
 
     event.preventDefault()
 
-    /* testing! */
     const taskListElement = taskListRef.current;
     const taskListRect = taskListElement.getBoundingClientRect();
     const mouseY = event.clientY;
@@ -166,7 +165,6 @@ const Tasks = ( {dark} ) => {
     } else if (mouseY > taskListRect.bottom - 20) {
       taskListElement.scrollTop += 10; // Scroll down
     }
-    /* testing! */
   
     const draggedItemIndex = tasks.findIndex(task => task.id === draggedItemId)
     

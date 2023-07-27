@@ -1,6 +1,6 @@
 import axios from "axios"
-// const baseUrl = "/api/goals"
-const baseUrl = 'https://timewise-backend.vercel.app/api/goals'
+const baseUrl = "/api/goals"
+// const baseUrl = 'https://timewise-backend.vercel.app/api/goals'
 
 let token = null
 

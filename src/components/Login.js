@@ -92,7 +92,7 @@ const Login = ( {user, setUser}) => {
             </div> */}
 
             <div className = "login-container">
-                <h1> TimeWise </h1>
+                <h1> Cowork </h1>
 
                 <input value = {username} placeholder = "Username"
                     onChange = {handleUsername}
@@ -125,7 +125,7 @@ const Login = ( {user, setUser}) => {
                 <h1> Create Account </h1>
 
                 {/* <p> Username </p> */}
-                <input className = {`create-user ${username.length < 3 ? 'short' : ''}`} placeholder = "Username" value = {username} 
+                <input className = {`create-user ${username.trim().length < 3 ? 'short' : ''}`} placeholder = "Username" value = {username} 
                     onChange = {handleUsername} 
                     onKeyDown = {(e) => {if(e.key === 'Enter'){handleCreateUser()}}}
                 />

@@ -1,6 +1,6 @@
 import axios from "axios"
-// const baseUrl = "/api/tasks"
-const baseUrl = 'https://timewise-backend.vercel.app/api/tasks'
+const baseUrl = "/api/tasks"
+// const baseUrl = 'https://timewise-backend.vercel.app/api/tasks'
 
 let token = null
 
@@ -15,6 +15,15 @@ const getAll = async () => {
     }
          
     const response = await axios.get(baseUrl, config)
+    return response.data
+}
+
+const getFromUser = async (username) => {
+    const config = {
+        headers: {Authorization: token}
+    }
+
+    const response = await axios.get(`${baseUrl}/${username}`)
     return response.data
 }
 
@@ -48,5 +57,6 @@ export default {
     create,
     setToken,
     remove,
-    update
+    update,
+    getFromUser
 }

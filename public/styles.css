@@ -601,17 +601,17 @@ body,
 }
 
 .tasks .task-list .progress {
-  background-color: #9FE59A;
+  background-color: #ccc;
   border-radius: 5px;
 }
 
 .tasks .task-list .progress.dark {
-  background-color: #0ed;
+  background-color: #555;
 }
 
-.tasks .task-list .progress.dark input {
+/* .tasks .task-list .progress.dark input {
   color: #000;
-}
+} */
 
 
 .tasks .task-list .delete-button {

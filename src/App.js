@@ -14,7 +14,8 @@ import Spotify from './components/Spotify'
 import { io } from 'socket.io-client'
 import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom'
 
-const socket = io.connect("http://localhost:3001")
+// const socket = io.connect("http://localhost:3001")
+const socket = io.connect("https://timewise-backend.vercel.app")
 
 function App() {
 

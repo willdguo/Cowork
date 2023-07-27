@@ -4,7 +4,7 @@ import Timer from './components/Timer'
 import Tasks from './components/Tasks'
 import Goals from './components/Goals'
 import Login from './components/Login'
-import CoworkerTasks from './components/CoworkerTasks'
+import Coworkers from './components/Coworkers'
 import goalsService from './services/goals'
 import tasksService from './services/tasks'
 import darkIcon from './icons/light.png'
@@ -12,6 +12,7 @@ import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
 import Spotify from './components/Spotify'
 import { io } from 'socket.io-client'
+import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom'
 
 const socket = io.connect("http://localhost:3001")
 
@@ -23,27 +24,30 @@ function App() {
   const [user, setUser] = useState(null)
   const [coworkers, setCoworkers] = useState([])
 
+  const [roomInput, setRoomInput] = useState([])
+  const [room, setRoom] = useState('')
+
+  const navigate = useNavigate()
+
   const n = useRef(0)
   const t = useRef(300)
   const flickers = 1
-
   const [copied, setCopied] = useState(false)
 
+  const testingvariable = useParams()
+
   useEffect(() => {
+
     socket.on("joined_room", (data) => {
       const test = coworkers.find(coworker => coworker.username.toString() === data.username.toString())
 
-      if(user !== null && user.username !== data.username && test === undefined){ // test === undefined false but still passes
-        // console.log('nice new user ')
-        // console.log(data)
+      if(user !== null && user.username !== data.username && test === undefined){
         setCoworkers(coworkers.concat(data))
       }
 
     })
 
     socket.on("joined_room_coworkers", (data) => {
-      console.log("past coworkers:")
-      console.log(data)
 
       if(user !== null){
         let temp = data.filter(coworker => coworker.username !== user.username)
@@ -56,6 +60,7 @@ function App() {
       console.log(`${data.username} left`)
       setCoworkers(coworkers.filter(coworker => coworker.username !== data.username))
     })
+    
   }, [user, coworkers])
 
   useEffect(() => {
@@ -76,8 +81,8 @@ function App() {
       setDesc('')
       n.current = 0
 
-
-      socket.emit("join_room", {...user, token: null})
+      // socket.emit("join_room", {...user, token: null, room: user.username})
+      // setRoom(user.username)
     }
 
   }, [user])
@@ -105,7 +110,7 @@ function App() {
   }, [desc, finalDesc])
 
   const handleCopyLink = () => {
-    const linkToCopy = 'https://workspace-kappa.vercel.app/'
+    const linkToCopy = window.location.href
 
     navigator.clipboard.writeText(linkToCopy)
       .then(() => {
@@ -135,8 +140,15 @@ function App() {
     setCoworkers([])
     socket.emit("logout")
     window.localStorage.clear()
+    navigate('/')
   }
 
+  const testingRooms = () => {
+    setRoom(roomInput)
+    navigate(`/cowork/${roomInput}`)
+    setRoomInput("")
+    socket.emit("join_room", {...user, token: null, room: roomInput})
+  }
 
   const main = () => (
 
@@ -149,6 +161,13 @@ function App() {
           <h2 style = {{whiteSpace: 'pre-line'}}> 
             <i> {desc} </i> 
           </h2>
+
+          <div>
+            <p> Current room: {room} </p>
+            <p onClick = {() => {console.log(room); console.log(testingvariable)}}> Join Room:  
+              <input value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){testingRooms()}}} />
+            </p>
+          </div>
           
         </div>
   
@@ -163,15 +182,12 @@ function App() {
         <div className = "tasks-grid">
           <Tasks dark = {dark} user = {user} socket = {socket}/>
 
-          {coworkers.map(coworker => (
-              <CoworkerTasks key = {coworker.username} username = {coworker.username} dark = {dark} socket = {socket} />
-          ))}
-
+          <Coworkers coworkers = {coworkers} user = {user} socket = {socket} setRoom = {setRoom} dark = {dark} />
         </div>
       </div>
 
       <div className = "toolbar">
-        <button onClick = {toggleDark}> <img src = {darkIcon} alt = "toggle colors"/> </button>          
+        <button onClick = {toggleDark}> <img src = {darkIcon} alt = "toggle colors" /> </button>          
         <button className = {dark} onClick={handleCopyLink}> <img src = {shareIcon} alt = "share" /> </button>
         <button onClick = {logout}> <img src = {logoutIcon} alt = "logout" /> </button>
 
@@ -182,17 +198,19 @@ function App() {
 
   )
 
-  const login = () => (
-      <Login user = {user} setUser = {setUser} />
-  )
-
   return (
 
     <div className = {`container ${dark} ${user === null ? 'new' : ''}`}>
-      {user === null
+      {/* {user === null
         ? login()
         : main()
-      }
+      } */}
+      <Routes>
+        <Route path = "/" element = {<Navigate replace to = "/login" />} />
+        <Route path = "/login" element = {user === null ? <Login user = {user} setUser = {setUser} /> : <Navigate replace to = {`/cowork/${user.username}`} />} />
+        <Route path = "/cowork/:id" element = {user === null ? <Login user = {user} setUser = {setUser} /> : main() } />
+        <Route path = "*" element = {<Navigate to = "/login"/>} />
+      </Routes>
     </div>
 
   )

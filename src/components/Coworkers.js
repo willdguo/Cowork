@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import tasksService from "../services/tasks";
-// import progressSound from "../sounds/add-task-sound.mp3"
-// import completeSound from "../sounds/task_complete.wav"
-// import clickSound from "../sounds/click-21156.mp3"
-
 
 const CoworkerTasks = ( {username, dark, socket} ) => {
-
     const [tasks, setTasks] = useState([])
 
     useEffect(() => {
@@ -81,7 +77,6 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
                 <h2> {username}'s To-do List </h2>
             </div>
 
-
             <div className = "task-list">
                 <ul>
                     {tasks.map(task => (
@@ -101,4 +96,38 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
 
 }
 
-export default CoworkerTasks
+
+const Coworkers = ({coworkers, dark, socket, setRoom, user}) => {
+    const urlRoom = useParams().id
+
+    useEffect(() => {
+
+        if(user === null){
+            setRoom(null)
+            return
+        }
+
+        if(urlRoom !== null){
+            console.log(`current room: ${urlRoom}`)
+            socket.emit("join_room", {...user, token: null, room: urlRoom})
+            setRoom(urlRoom)
+        } else {
+            setRoom(user.username)
+            socket.emit("join_room", {...user, token: null, room: user.username})
+        }
+
+    // eslint-disable-next-line
+    }, [user])
+
+    return (
+        <>
+            {coworkers.map(coworker => (
+            <CoworkerTasks key = {coworker.username} username = {coworker.username} dark = {dark} socket = {socket} />
+            ))}
+        </>
+    )
+
+}
+
+
+export default Coworkers

@@ -15,7 +15,8 @@ import { io } from 'socket.io-client'
 import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom'
 
 // const socket = io.connect("http://localhost:3001")
-const socket = io.connect("https://timewise-backend.vercel.app")
+// const socket = io.connect("https://timewise-backend.vercel.app")
+const socket = io.connect("http://34.217.73.248:3001")
 
 function App() {
 

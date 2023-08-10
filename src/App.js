@@ -155,46 +155,45 @@ function App() {
   const main = () => (
 
     <div className = {`main-container ${dark}`}>
-      
-      <div className = {`sidebar ${dark}`}>
-          
-        <div className = "description">
-  
-          <h2 style = {{whiteSpace: 'pre-line'}}> 
-            <i> {desc} </i> 
-          </h2>
 
-          <div>
-            <p> Current room: {room} </p>
-            <p onClick = {() => {console.log(room); console.log(testingvariable)}}> Join Room:  
-              <input value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){testingRooms()}}} />
-            </p>
+      <div className = {`toolbar ${dark}`}>
+        <i className = "description"> {desc} </i>
+
+        <div className = "room">
+          Room: {room}
+          <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){testingRooms()}}} />
+        </div>
+
+        <div className = "toolbar-options">
+          <button onClick = {toggleDark}> <img src = {darkIcon} alt = "toggle colors" /> </button>          
+          <button className = {dark} onClick={handleCopyLink}> <img src = {shareIcon} alt = "share" /> </button>
+          <button onClick = {logout}> <img src = {logoutIcon} alt = "logout" /> </button>
+          <p> {copied ? 'Link Copied!' : null} </p>
+        </div>
+
+      </div>
+
+      <div className = "content">
+
+        <div className = {`sidebar ${dark}`}>
+    
+          <Goals dark = {dark} />
+          <Spotify />
+    
+        </div>
+
+        <div className = "main-content">
+          <Timer dark = {dark} />
+
+          <div className = "tasks-grid">
+            <Tasks dark = {dark} user = {user} socket = {socket}/>
+
+            <Coworkers coworkers = {coworkers} user = {user} socket = {socket} setRoom = {setRoom} dark = {dark} />
           </div>
-          
         </div>
-  
-        <Goals dark = {dark} />
-        <Spotify />
-  
+
       </div>
 
-      <div className = "main-content">
-        <Timer dark = {dark} />
-
-        <div className = "tasks-grid">
-          <Tasks dark = {dark} user = {user} socket = {socket}/>
-
-          <Coworkers coworkers = {coworkers} user = {user} socket = {socket} setRoom = {setRoom} dark = {dark} />
-        </div>
-      </div>
-
-      <div className = "toolbar">
-        <button onClick = {toggleDark}> <img src = {darkIcon} alt = "toggle colors" /> </button>          
-        <button className = {dark} onClick={handleCopyLink}> <img src = {shareIcon} alt = "share" /> </button>
-        <button onClick = {logout}> <img src = {logoutIcon} alt = "logout" /> </button>
-
-        <p> {copied ? 'Link Copied!' : null} </p>
-      </div>
 
     </div>
 
@@ -203,10 +202,6 @@ function App() {
   return (
 
     <div className = {`container ${dark} ${user === null ? 'new' : ''}`}>
-      {/* {user === null
-        ? login()
-        : main()
-      } */}
       <Routes>
         <Route path = "/" element = {<Navigate replace to = "/login" />} />
         <Route path = "/login" element = {user === null ? <Login user = {user} setUser = {setUser} /> : <Navigate replace to = {`/cowork/${user.username}`} />} />

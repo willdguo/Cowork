@@ -138,10 +138,10 @@ const Goals = ( {dark} ) => {
                             <input className = "goal-content" value = {goal.content} onChange = {event => handleGoalEdit(goal.id, event)}/>
                             
                             <div className="goal-options">
-                                <button className = "show-options"> ... </button>
+                                <button className = "show-options"> ••• </button>
 
                                 <div className="goal-options-container">
-                                    <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> Delete </button>
+                                    <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> Delete Goal </button>
                                 </div>
 
                             </div>

@@ -84,7 +84,7 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
                             <p className = {`task-content ${dark} ` + (task.status ? "strikethrough" : "")}> {task.content} </p>
 
                             <div className="task-options">
-                                <button className = "show-options"> {task.progress ? 'IN PROGRESS' : '...'} </button>
+                                <button className = "show-options"> {task.progress ? 'in progress' : '•••'} </button>
                             </div>
                         </li>
                     ))}
@@ -122,7 +122,7 @@ const Coworkers = ({coworkers, dark, socket, setRoom, user}) => {
     return (
         <>
             {coworkers.map(coworker => (
-            <CoworkerTasks key = {coworker.username} username = {coworker.username} dark = {dark} socket = {socket} />
+                <CoworkerTasks key = {coworker.username} username = {coworker.username} dark = {dark} socket = {socket} />
             ))}
         </>
     )

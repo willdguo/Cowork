@@ -64,7 +64,7 @@ const Spotify = () => {
     return (
     <   div className = "spotify-player">
 
-            {spotifyToken === ''
+            {/* {spotifyToken === ''
             ?   <a id = "spotify-login" href = {loginUrl}>
                     <span> Use Spotify Player </span>
                 </a>
@@ -74,7 +74,13 @@ const Spotify = () => {
                 allow = "encrypted-media" 
                 title = "Peaceful Piano"
             />
-            }         
+            }          */}
+            <iframe 
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4sWSpwq3LiO?utm_source=generator" 
+                allowtransparency = "true" 
+                allow = "encrypted-media" 
+                title = "Peaceful Piano"
+            />
 
         </div> 
     )

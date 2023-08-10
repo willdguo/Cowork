@@ -110,8 +110,8 @@ const Timer = ( {dark} ) => {
                 <button onClick = {running ? () => flipTimer() : (time > 0 ? () => flipTimer() : () => startTimer())}> {running ? 'Pause' : 'Start'} </button>
                 <button className = {`reset ${running ? '' : 'hidden'}`} onClick = {() => resetTimer()}> Reset </button>
 
-                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(15)}> Start 15 min </button>
-                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(60)}> Start 1 hr </button>
+                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(10)}> Start 10 min </button>
+                <button className = {running ? 'hidden' : ''} onClick = {() => startTimer(30)}> Start 30 min </button>
 
             </div>
 

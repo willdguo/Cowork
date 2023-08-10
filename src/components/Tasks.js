@@ -71,7 +71,9 @@ const Tasks = ( {dark, user, socket} ) => {
       if(task.id === id){
 
         if(!task.status){
-          new Audio(audio).play()
+          const tempAudio = new Audio(audio)
+          tempAudio.volume = 0.2
+          tempAudio.play()
         }
 
         return {...task, status: !task.status, progress: false}
@@ -241,8 +243,8 @@ const Tasks = ( {dark, user, socket} ) => {
                           // onKeyDown = {event => {if(event.key === 'Enter'){handleAddTask('New Task', tasks.indexOf(task) + 1)}}}
                       />
 
-                      <div className="task-options">
-                        <button className = "show-options"> {task.progress ? 'IN PROGRESS' : '...'} </button>
+                      <div className={`task-options ${dark}`}>
+                        <button className = "show-options"> {task.progress ? 'in progress' : '•••'} </button>
 
                         <div className="task-options-container">
                           <button className="task-option-button" onClick={() => handleTaskProgress(task.id)}> {task.progress ? 'Remove ' : 'Set In '} Progress </button>

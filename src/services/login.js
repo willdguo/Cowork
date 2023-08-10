@@ -1,7 +1,7 @@
 import axios from 'axios'
 // const baseUrl = "/api/login"
 // const baseUrl = 'https://timewise-backend.vercel.app/api/login'
-const baseUrl = 'http://34.217.73.248:3001/api/login'
+const baseUrl = 'https://cowork-server.link/api/login'
 
 
 const login = async (credentials) => {

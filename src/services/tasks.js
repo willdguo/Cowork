@@ -1,7 +1,7 @@
 import axios from "axios"
 // const baseUrl = "/api/tasks"
 // const baseUrl = 'https://timewise-backend.vercel.app/api/tasks'
-const baseUrl = 'http://34.217.73.248:3001/api/tasks'
+const baseUrl = 'https://cowork-server.link/api/tasks'
 
 
 let token = null

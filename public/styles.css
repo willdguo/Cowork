@@ -5,6 +5,7 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
 }
 
 .container {
@@ -23,7 +24,7 @@ body,
   background-color: #ccc;
   width: 100%;
   height: 48px;
-  padding: 4px 0px 2px 4px;
+  padding: 4px 0px 2px 0px;
   display: flex;
   align-items: center;
   position: relative;
@@ -52,10 +53,12 @@ body,
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   color: white;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .toolbar.dark .room input {
   border: 1px solid #333;
+  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
 }
 
 .toolbar .room input:focus{
@@ -241,7 +244,7 @@ body,
   border: none;
 }
 
-.spotify-player #spotify-login {
+/* .spotify-player #spotify-login {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -265,7 +268,7 @@ body,
   color: #ccc;
   text-decoration: none;
   padding: 5px;
-}
+} */
 
 .goals {
   /* border: 1px solid #222; */
@@ -349,6 +352,7 @@ body,
 .goals .goal-list ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .goals .goal-list li {
@@ -356,22 +360,23 @@ body,
   display: flex;
   align-items: center;
   margin-bottom: 2px;
-  padding: 10px;
+  padding: 5px;
   width: 95%;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .goals .goal-list.dark li {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #333;
 }
 
 .goals .goal-list .goal-content {
   border: none;
+  /* border-bottom: 1px solid #e0e0e0; */
   background-color: transparent;
   font-family: inherit;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 12px;
+  font-size: 20px;
+  margin: 8px;
+  padding: 8px;
   width: 80%;
   color: #333;
   outline: none;
@@ -379,6 +384,7 @@ body,
 
 .goals .goal-list.dark .goal-content {
   color: #ddd;
+  /* border-bottom: 1px solid #333; */
 }
 
 .goals .goal-list .goal-options {
@@ -398,6 +404,11 @@ body,
   border-radius: 4px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   transition: opacity 0.2s ease;
+}
+
+.goals .goal-list.dark .goal-options .goal-options-container {
+  background-color: #111;
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.1)
 }
 
 .goals .goal-list .goal-options:hover .goal-options-container {
@@ -596,6 +607,7 @@ body,
 
 .tasks .header .tasks-title {
   font-family: inherit;
+  font-weight: bold;
   width: 80%;
   background-color: transparent;
   font-size: 32px;
@@ -636,7 +648,7 @@ body,
   list-style-type: none;
   padding: 0;
   text-align: left;
-  max-height: 400px;
+  height: 400px;
   overflow-y: auto;
 }
 
@@ -663,21 +675,15 @@ body,
   font-family: inherit;
   display: flex;
   align-items: center;
-  margin-bottom: 2px;
   margin-left: 2px;
   padding: 5px;
-  border-bottom: 1px solid #ddd;
   width: 96%;
-}
-
-.tasks .task-list li.dark {
-  border-bottom: 1px solid #333
 }
 
 .tasks .task-list li input[type = "checkbox"] {
   background-color: transparent;
-  width: 20px;
-  height: 20px;
+  max-width: 25px;
+  max-height: 25px;
   margin-right: 10px;
 }
 
@@ -710,9 +716,11 @@ body,
 .tasks .task-list .task-content {
   font-family: inherit;
   border: none;
+  border-bottom: 1px solid #e0e0e0;
   background-color: transparent;
-  font-size: inherit;
-  margin: 10px;
+  font-size: 16px;
+  padding: 10px 4px 10px 4px;
+  margin: 5px 2px 5px 5px;
   width: 80%;
   color: #000;
   outline: none;
@@ -720,14 +728,31 @@ body,
 
 .tasks .task-list .task-content.dark {
   color: white;
+  border-bottom: 1px solid #333;
 }
 
 .tasks .task-list .task-options {
   position: relative;
-  display: inline-block;
+  /* display: inline-block; */
+  display: none;
   border-radius: 4px;
 }
 
+.tasks .task-list li:hover .task-options {
+  display: inline-block;
+}
+
+.tasks .task-list .progress .task-options {
+  display: inline-block;
+}
+
+.tasks.coworker .task-list li:hover .task-options {
+  display: none;
+}
+
+.tasks.coworker .task-list .progress:hover .task-options {
+  display: inline-block;
+}
 
 .tasks .task-list .task-options .task-options-container {
   z-index: 1;

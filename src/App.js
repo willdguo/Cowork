@@ -12,7 +12,7 @@ import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
 import Spotify from './components/Spotify'
 import { io } from 'socket.io-client'
-import { Routes, Route, useNavigate, Navigate, useParams } from 'react-router-dom'
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
 // const socket = io.connect("http://localhost:3001")
 // const socket = io.connect("https://timewise-backend.vercel.app")
@@ -36,11 +36,9 @@ function App() {
   const flickers = 1
   const [copied, setCopied] = useState(false)
 
-  const testingvariable = useParams()
-
   useEffect(() => {
 
-    socket.on("joined_room", (data) => {
+    socket.on("joined_room", (data) => { // fix duplicate coworker glitch
       const test = coworkers.find(coworker => coworker.username.toString() === data.username.toString())
 
       if(user !== null && user.username !== data.username && test === undefined){
@@ -82,9 +80,6 @@ function App() {
       setFinalDesc(`Welcome, ${user.username}`)
       setDesc('')
       n.current = 0
-
-      // socket.emit("join_room", {...user, token: null, room: user.username})
-      // setRoom(user.username)
     }
 
   }, [user])
@@ -145,8 +140,9 @@ function App() {
     navigate('/')
   }
 
-  const testingRooms = () => {
+  const joinRoom = () => {
     setRoom(roomInput)
+    // window.localStorage.setItem('loggedRoom', JSON.stringify(roomInput))
     navigate(`/cowork/${roomInput}`)
     setRoomInput("")
     socket.emit("join_room", {...user, token: null, room: roomInput})
@@ -161,7 +157,7 @@ function App() {
 
         <div className = "room">
           Room: {room}
-          <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){testingRooms()}}} />
+          <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){joinRoom()}}} />
         </div>
 
         <div className = "toolbar-options">

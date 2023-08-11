@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import audio from '../sounds/task_complete.wav'
+import audio from '../sounds/khan-academy-sound.mp3'
 import audio4 from '../sounds/add-task-sound.mp3'
 import audio2 from '../sounds/click-21156.mp3'
 import tasksService from '../services/tasks'
@@ -72,7 +72,7 @@ const Tasks = ( {dark, user, socket} ) => {
 
         if(!task.status){
           const tempAudio = new Audio(audio)
-          tempAudio.volume = 0.2
+          tempAudio.volume = 0.5
           tempAudio.play()
         }
 

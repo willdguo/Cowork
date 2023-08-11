@@ -1,4 +1,5 @@
 import audio from '../sounds/timer_complete.mp3'
+import audio2 from '../sounds/start_timer.mp3'
 import { useState, useEffect, useRef } from 'react'
 
 const Timer = ( {dark} ) => {
@@ -77,6 +78,8 @@ const Timer = ( {dark} ) => {
             console.log("started timer")
             setTime(Math.floor(k * 60))
             setRunning(true)
+
+            new Audio(audio2).play()
         }
   
     }

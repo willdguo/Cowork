@@ -1,9 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
-import tasksService from "../services/tasks";
+import tasksService from "../services/tasks"
+import clickSound from '../sounds/click-21156.mp3'
+import progressSound from '../sounds/add-task-sound.mp3'
+import completeSound from '../sounds/khan-academy-sound.mp3'
 
 const CoworkerTasks = ( {username, dark, socket} ) => {
     const [tasks, setTasks] = useState([])
+    const soundsTimer = useRef(null)
 
     useEffect(() => {
         tasksService.getFromUser(username)
@@ -20,13 +24,20 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
             if(data.username === username) {
                 setTasks(tasks.concat(data))
 
-                // new Audio(clickSound).play()
+                clearTimeout(soundsTimer.current)
+                soundsTimer.current = setTimeout(() => {
+                    new Audio(clickSound).play()
+                }, 500)
+
             }
         })
 
         socket.on("coworker_deleted_task", (data) => {
             if(data.username === username) {
-                // new Audio(clickSound).play()
+                clearTimeout(soundsTimer.current)
+                soundsTimer.current = setTimeout(() => {
+                    new Audio(clickSound).play()
+                }, 500)
 
                 console.log(data)
 
@@ -45,9 +56,12 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
         socket.on("coworker_progress_task", (data) => {
             if(data.username === username) {
 
-                // if(data.progress){
-                //     new Audio(progressSound).play()
-                // }
+                if(data.progress){
+                    clearTimeout(soundsTimer.current)
+                    soundsTimer.current = setTimeout(() => {
+                        new Audio(progressSound).play()
+                    }, 500)
+                }
 
                 const updatedTasks = tasks.map(task => task.id === data.id ? {...data} : task)
                 setTasks(updatedTasks)
@@ -57,9 +71,18 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
         socket.on("coworker_status_task", (data) => {
             if(data.username === username) {
 
-                // if(data.status){
-                //     new Audio(completeSound).play()
-                // }
+                if(data.status){
+                    console.log(username, "completed a task")
+
+                    clearTimeout(soundsTimer.current)
+                    soundsTimer.current = setTimeout(() => {
+                        const tempAudio = new Audio(completeSound)
+                        tempAudio.volume = 0.1
+                        tempAudio.play()
+                    }, 500)
+
+                    
+                }
 
                 const updatedTasks = tasks.map(task => task.id === data.id ? {...data} : task)
                 setTasks(updatedTasks)
@@ -71,7 +94,7 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
 
 
     return (
-        <div className='tasks'>
+        <div className='tasks coworker'>
 
             <div className = {`header ${dark}`}>
                 <h2> {username}'s To-do List </h2>
@@ -112,8 +135,19 @@ const Coworkers = ({coworkers, dark, socket, setRoom, user}) => {
             socket.emit("join_room", {...user, token: null, room: urlRoom})
             setRoom(urlRoom)
         } else {
+            // const loggedRoomJSON = window.localStorage.getItem('loggedRoom')
+            // console.log("saved room:", loggedRoomJSON)
+            // if(loggedRoomJSON){
+            //     const savedRoom = JSON.parse(loggedRoomJSON)
+            //     setRoom(savedRoom)
+            //     socket.emit("join_room", {...user, token: null, room: savedRoom})
+            //     navigate(`/cowork/${savedRoom}`)
+
+            // } else{
             setRoom(user.username)
             socket.emit("join_room", {...user, token: null, room: user.username})
+            // }
+
         }
 
     // eslint-disable-next-line

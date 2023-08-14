@@ -4,6 +4,7 @@ import tasksService from "../services/tasks"
 import clickSound from '../sounds/click-21156.mp3'
 import progressSound from '../sounds/add-task-sound.mp3'
 import completeSound from '../sounds/khan-academy-sound.mp3'
+import progressSound2 from '../sounds/delete-task-sound.mp3'
 
 const CoworkerTasks = ( {username, dark, socket} ) => {
     const [tasks, setTasks] = useState([])
@@ -60,6 +61,11 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
                     clearTimeout(soundsTimer.current)
                     soundsTimer.current = setTimeout(() => {
                         new Audio(progressSound).play()
+                    }, 500)
+                } else {
+                    clearTimeout(soundsTimer.current)
+                    soundsTimer.current = setTimeout(() => {
+                        new Audio(progressSound2).play()
                     }, 500)
                 }
 

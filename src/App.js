@@ -11,6 +11,7 @@ import darkIcon from './icons/light.png'
 import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
 import Spotify from './components/Spotify'
+import joinNotif from './sounds/click-21156.mp3'
 import { io } from 'socket.io-client'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 
@@ -35,6 +36,7 @@ function App() {
   const t = useRef(300)
   const flickers = 1
   const [copied, setCopied] = useState(false)
+  const joinNotifTimer = useRef(null)
 
   useEffect(() => {
 
@@ -44,6 +46,11 @@ function App() {
       if(user !== null && user.username !== data.username && test === undefined){
         setCoworkers(coworkers.concat(data))
       }
+      
+      clearTimeout(joinNotifTimer.current)
+      joinNotifTimer.current = setTimeout(() => {
+        new Audio(joinNotif).play()
+      }, 500)
 
     })
 
@@ -141,6 +148,7 @@ function App() {
   }
 
   const joinRoom = () => {
+    new Audio(joinNotif).play()
     setRoom(roomInput)
     // window.localStorage.setItem('loggedRoom', JSON.stringify(roomInput))
     navigate(`/cowork/${roomInput}`)

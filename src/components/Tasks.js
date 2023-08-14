@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import audio from '../sounds/khan-academy-sound.mp3'
 import audio4 from '../sounds/add-task-sound.mp3'
 import audio2 from '../sounds/click-21156.mp3'
+import audio5 from '../sounds/delete-task-sound.mp3'
 import tasksService from '../services/tasks'
 
 const Tasks = ( {dark, user, socket} ) => {
@@ -105,6 +106,8 @@ const Tasks = ( {dark, user, socket} ) => {
 
         if (!task.progress) {
           new Audio(audio4).play()
+        } else {
+          new Audio(audio5).play()
         }
 
         task = {...task, progress: !task.progress}

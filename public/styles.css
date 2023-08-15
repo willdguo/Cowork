@@ -733,24 +733,15 @@ body,
 
 .tasks .task-list .task-options {
   position: relative;
-  /* display: inline-block; */
-  display: none;
+  display: inline-block;
   border-radius: 4px;
 }
 
-.tasks .task-list li:hover .task-options {
-  display: inline-block;
-}
-
-.tasks .task-list .progress .task-options {
-  display: inline-block;
-}
-
-.tasks.coworker .task-list li:hover .task-options {
+.tasks.coworker .task-list .task-options {
   display: none;
 }
 
-.tasks.coworker .task-list .progress:hover .task-options {
+.tasks.coworker .task-list .progress .task-options {
   display: inline-block;
 }
 

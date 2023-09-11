@@ -20,6 +20,23 @@ body,
   justify-content: center;
 }
 
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.dark {
+  background-color: #111;
+  /* background-color: #202225; */
+  /* background-color: #2f3136; */
+  /* background-color: #202225; */
+  color: #F8F8F8;
+}
+
 .toolbar {
   background-color: #ccc;
   width: 100%;
@@ -29,6 +46,8 @@ body,
   align-items: center;
   position: relative;
   justify-content: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .toolbar.dark {
@@ -42,46 +61,21 @@ body,
 
 .toolbar .room {
   text-align: center;
-}
-
-.toolbar .room input {
-  background-color: transparent;
-  padding: 10px;
-  margin-left: 10px;
-  font-size: 16px;
-  width: 256px;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  color: white;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
-}
-
-.toolbar.dark .room input {
-  border: 1px solid #333;
-  box-shadow: 0 1px 1px rgba(255, 255, 255, 0.1);
-}
-
-.toolbar .room input:focus{
-  outline: 1px solid #333;
-}
-
-.toolbar .room input::placeholder{
-  opacity: 50%;
+  opacity: 60%;
 }
 
 .toolbar .toolbar-options {
   position: absolute;
   right: 1px;
-
 }
 
 .toolbar .toolbar-options button {
-  margin-right: 10px;
+  margin-right: 6px;
   background-color: #fff;
   color: #000;
   border: 1px solid #aaa;
   border-radius: 4px;
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -98,33 +92,18 @@ body,
 .toolbar .toolbar-options img {
   background-color: transparent;
   width: 20px;
-  height: 20px
+  height: 20px;
+  margin-bottom: 2px;
 }
 
 .toolbar .toolbar-options p {
   position: absolute;
-  top: 50%;
+  top: 100%;
 }
 
 .content {
   display: flex;
   flex: 1;
-}
-
-.main-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  min-width: 100%;
-  background-color: #f1f1f1
-}
-
-.dark {
-  background-color: #111;
-  /* background-color: #202225; */
-  /* background-color: #2f3136; */
-  /* background-color: #202225; */
-  color: #F8F8F8;
 }
 
 .logged-out {
@@ -135,31 +114,24 @@ body,
   transform: translateY(-10%);
 }
 
-/* .logged-out .samples {
-  background-color: #999;
-  margin-right: 10px;
-}
-
-.logged-out .samples img {
-  width: 50%;
-} */
-
 .logged-out .login-container {
   text-align: center;
   background-color: transparent;
   border: 1px solid #E0E0E0;
   border-radius: 2px;
   padding: 20px;
-  width: 300px;
+  width: 360px;
 }
 
 .logged-out .login-container h1 {
-  margin-top: none;
+  margin-top: 10px;
   margin-bottom: 10px;
   padding-bottom: 20px;
+  font-weight: bold;
 }
 
 .logged-out .login-container .newUser {
+  padding-top: 10px;
   font-style: italic;
   font-size: 75%;
   color: #c0c0c0;
@@ -221,7 +193,7 @@ body,
 }
 
 .sidebar {
-  width: 30%;
+  width: 32%;
   padding: 10px;
   padding-right: 50px;
   border-right: 1px solid #000;
@@ -271,19 +243,18 @@ body,
 } */
 
 .goals {
-  /* border: 1px solid #222; */
   text-align: center;
   border-radius: 10px;
   width: 100%;
-  font-family: inherit;
-  max-height: 500px;
-  overflow-y: auto;
+  margin-top: 10px;
+  height: 500px;
+  /* border: 1px */
 }
 
 @media (max-height: 500px) {
 
   .goals {
-    min-height: 180px
+    max-height: 180px
   }
   
 }
@@ -293,8 +264,12 @@ body,
   border-bottom: 2px solid black;
 }
 
+.goals .header h2 {
+  font-weight: bold;
+}
+
 .goals .header.dark {
-  border-bottom: 2px solid #f1f1f1;
+  border-bottom: 1px solid #555;  
 }
 
 .goals .header.dark input{
@@ -320,7 +295,6 @@ body,
 }
 
 .goals .header button:hover {
-  /* background-color: #fff; */
   color: #fff;
 }
 
@@ -352,7 +326,33 @@ body,
 .goals .goal-list ul {
   list-style-type: none;
   padding: 0;
+  padding-bottom: 60px;
   margin: 0;
+  height: 160px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+.goal-list ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+.goal-list ul::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-left: 1px solid #222;
+}
+
+.goal-list ul::-webkit-scrollbar-thumb {
+  background-color: #222;
+  border-radius: 4px;
+}
+
+.goal-list ul::-webkit-scrollbar-thumb:hover {
+  background-color: #222;
+}
+
+.goals .goal-list.dark ul {
+  border-bottom: 1px solid #222;
 }
 
 .goals .goal-list li {
@@ -361,7 +361,7 @@ body,
   align-items: center;
   margin-bottom: 2px;
   padding: 5px;
-  width: 95%;
+  width: 100%;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -375,7 +375,7 @@ body,
   background-color: transparent;
   font-family: inherit;
   font-size: 20px;
-  margin: 8px;
+  margin: 0px 8px 0px 8px;
   padding: 8px;
   width: 80%;
   color: #333;
@@ -396,10 +396,11 @@ body,
   z-index: 1;
   position: absolute;
   text-align: center;
+  display: none;
   top: 100%;
   right: 0%;
   opacity: 0;
-  width: 140px;
+  width: 100px;
   background-color: #ffffff;
   border-radius: 4px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -421,8 +422,8 @@ body,
   color: #444;
   border: none;
   padding: 6px 14px;
-  font-size: 14px;
-  font-weight: bold;
+  margin: 0px;
+  font-size: 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -433,21 +434,92 @@ body,
   color: #ccc;
 }
 
-.goals .goal-list .goal-options .delete-button {
-  background-color : #ee6767;
+.goals .goal-list .goal-options button {
+  background-color: transparent;
   border-radius: 4px;
-  padding: 5px;
-  margin: 5px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #ddd;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  color: #000;
   border: none;
   transition: background-color 0.3s ease;
 }
 
+.goals .goal-list.dark .goal-options button {
+  color: white;
+}
+
+.goals .goal-list .goal-options .delete-button {
+  padding: 5px;
+  font-weight: bold;
+  color: #ddd;
+  background-color: #ee6767;
+}
+
+.goals .goal-list .goal-options button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.goals .goal-list.dark .goal-options button:hover {
+  background-color: #ccc;
+}
+
 .goals .goal-list .goal-options .delete-button:hover {
   background-color: #b44;
-  cursor:pointer;
+}
+
+.goals .goal-view {
+  position: relative;
+  margin-top: 10px;
+  padding-top: 5px;
+  text-align: left;
+}
+
+.goals .goal-view textarea {
+  height: 300px;
+  max-height: 300px;
+  width: 100%;
+  resize: none;
+  border-radius: 10px;
+  padding: 5px;
+  overflow-y: auto;
+  background-color: transparent;
+  width: 90%;
+}
+
+.goals .goal-view.dark textarea {
+  color: white;
+}
+
+.goals .goal-view button {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  padding: 6px 12px;
+  font-size: 12px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.goals .goal-view.dark button {
+  color: white;
+  box-shadow: 0 0 2px 1px rgba(255, 255, 255, 0.1);
+}
+
+.goals .goal-view button:hover{
+  background-color: black;
+  color: white;
+}
+
+.goals .goal-view.dark button:hover{
+  background-color: white;
+  color: black;
 }
 
 .main-content {
@@ -598,7 +670,7 @@ body,
 }
 
 .tasks .header.dark {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #555;
 }
 
 .tasks .header.dark .add-task {
@@ -634,22 +706,16 @@ body,
   color: #000;
 }
 
-.tasks .task-list ul {
+.task-list ul {
   font-family: inherit;
   list-style-type: none;
+  padding: 2px 7px 2px 0px;
   padding-bottom: 53px;
-  margin: 0;
   text-align: left;
   max-height: 270px;
-  overflow-y: auto;
-}
-
-.task-list ul {
-  list-style-type: none;
-  padding: 0;
-  text-align: left;
   height: 400px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .task-list ul::-webkit-scrollbar {
@@ -675,9 +741,10 @@ body,
   font-family: inherit;
   display: flex;
   align-items: center;
-  margin-left: 2px;
+  margin-left: 5px;
   padding: 5px;
-  width: 96%;
+  width: 100%;
+  height: 60px; 
 }
 
 .tasks .task-list li input[type = "checkbox"] {
@@ -687,12 +754,12 @@ body,
   margin-right: 10px;
 }
 
-.tasks .task-list .progress {
+.tasks .task-list .in-progress {
   background-color: #ccc;
   border-radius: 5px;
 }
 
-.tasks .task-list .progress.dark {
+.tasks .task-list .in-progress.dark {
   background-color: #555;
 }
 
@@ -702,7 +769,7 @@ body,
   color: #FFFFFF;
   border: none;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
@@ -741,16 +808,16 @@ body,
   display: none;
 }
 
-.tasks.coworker .task-list .progress .task-options {
+.tasks.coworker .task-list .in-progress .task-options {
   display: inline-block;
 }
 
 .tasks .task-list .task-options .task-options-container {
   z-index: 1;
   position: absolute;
-  text-align: center;
   top: 100%;
   right: 0%;
+  text-align: center;
   display: none;
   width: 140px;
   background-color: #f1f1f1;
@@ -778,6 +845,7 @@ body,
   cursor: pointer;
   padding: 4px 10px;
   margin-bottom: 5px;
+  font-size: 12px;
   display: block;
   width: 100%;
   transition: background-color 0.1s ease;
@@ -796,7 +864,7 @@ body,
   color: #444;
   border: none;
   padding: 6px 14px;
-  font-size: 14px;
+  font-size: 8px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
@@ -808,22 +876,21 @@ body,
   color: #ccc;
 }
 
-.tasks .task-list .progress .task-options .show-options {
+.tasks .task-list .in-progress .task-options .show-options {
   text-align: center;
   width: 100px;
   font-size: 12px;
-  padding: 10px;
+  padding: 8px 0px 8px 0px;
   background-color: #fff;
   color: #9FE59A;
 }
 
-.tasks .task-list .progress .task-options .show-options:hover {
+.tasks .task-list .in-progress .task-options .show-options:hover {
   background-color: #aaa;
 }
 
-.tasks .task-list .progress.dark .task-options .show-options {
+.tasks .task-list .in-progress.dark .task-options .show-options {
   color: #0dc;
-  /* color: #000 */
 }
 
 

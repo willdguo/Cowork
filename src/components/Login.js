@@ -78,7 +78,7 @@ const Login = ( {user, setUser}) => {
 
             setTimeout(() => {
                 setErrorMessage(null)
-            }, 5000)
+            }, 3000)
         }
 
     }
@@ -122,7 +122,9 @@ const Login = ( {user, setUser}) => {
         <div className = "logged-out">
 
             <div className = "login-container">
-                <h1> Create Account </h1>
+                <h1> Cowork </h1>
+
+                <p> Create Account </p>
 
                 {/* <p> Username </p> */}
                 <input className = {`create-user ${username.trim().length < 3 ? 'short' : ''}`} placeholder = "Username" value = {username} 

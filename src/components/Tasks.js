@@ -233,7 +233,7 @@ const Tasks = ( {dark, user, socket} ) => {
           <ul ref = {taskListRef}>
               {tasks.map(task => (
 
-                  <li key = {task.id} data-task-id = {task.id} className = {`${dark} ${task.progress ? "progress" : ""}`} draggable = "true" 
+                  <li key = {task.id} data-task-id = {task.id} className = {`${dark} ${task.progress ? "in-progress" : ""}`} draggable = "true" 
                     onDragStart = {event => handleDragStart(event, task.id)} 
                     onDragOver = {event => handleDragOver(event, task.id)} 
                     onDrop = {event => handleDrop(event, task.id)}

@@ -109,7 +109,7 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
             <div className = "task-list">
                 <ul>
                     {tasks.map(task => (
-                        <li key = {task.id} className = {`${dark} ${task.progress ? "progress" : ""}`}>
+                        <li key = {task.id} className = {`${dark} ${task.progress ? "in-progress" : ""}`}>
                             <p className = {`task-content ${dark} ` + (task.status ? "strikethrough" : "")}> {task.content} </p>
 
                             <div className="task-options">

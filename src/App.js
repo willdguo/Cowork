@@ -14,6 +14,7 @@ import Spotify from './components/Spotify'
 import joinNotif from './sounds/click-21156.mp3'
 import { io } from 'socket.io-client'
 import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { ProgressBar } from 'react-bootstrap'
 
 // const socket = io.connect("http://localhost:3001")
 // const socket = io.connect("https://timewise-backend.vercel.app")
@@ -27,7 +28,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [coworkers, setCoworkers] = useState([])
 
-  const [roomInput, setRoomInput] = useState([])
+  // const [roomInput, setRoomInput] = useState([])
   const [room, setRoom] = useState('')
 
   const navigate = useNavigate()
@@ -147,25 +148,27 @@ function App() {
     navigate('/')
   }
 
-  const joinRoom = () => {
-    new Audio(joinNotif).play()
-    setRoom(roomInput)
-    // window.localStorage.setItem('loggedRoom', JSON.stringify(roomInput))
-    navigate(`/cowork/${roomInput}`)
-    setRoomInput("")
-    socket.emit("join_room", {...user, token: null, room: roomInput})
-  }
+  // const joinRoom = () => {
+  //   new Audio(joinNotif).play()
+  //   setRoom(roomInput)
+  //   // window.localStorage.setItem('loggedRoom', JSON.stringify(roomInput))
+  //   navigate(`/cowork/${roomInput}`)
+  //   setRoomInput("")
+  //   socket.emit("join_room", {...user, token: null, room: roomInput})
+  // }
 
   const main = () => (
 
     <div className = {`main-container ${dark}`}>
 
       <div className = {`toolbar ${dark}`}>
-        <i className = "description"> {desc} </i>
+        <div className = "description">
+          {desc}
+        </div>
 
         <div className = "room">
           Room: {room}
-          <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){joinRoom()}}} />
+          {/* <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){joinRoom()}}} /> */}
         </div>
 
         <div className = "toolbar-options">

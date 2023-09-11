@@ -6,6 +6,7 @@ const Goals = ( {dark} ) => {
 
     const [goals, setGoals] = useState([])
     const [newGoal, setNewGoal] = useState('')
+    const [goalView, setGoalView] = useState(null)
 
     const [draggedItemId, setDraggedItemId] = useState(-1)
 
@@ -114,7 +115,7 @@ const Goals = ( {dark} ) => {
         <div className = "goals"> 
 
             <div className = {`header ${dark}`}>
-                <h1> My Goals </h1>
+                <h2> My Goals </h2>
 
                 <input
                     type="text"
@@ -141,22 +142,62 @@ const Goals = ( {dark} ) => {
                                 <button className = "show-options"> ••• </button>
 
                                 <div className="goal-options-container">
+                                    <button className = "goal-notes" onClick = {() => setGoalView(goal)}> Show Notes </button>
                                     <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> Delete Goal </button>
                                 </div>
 
                             </div>
-                            {/* <button className = "delete-button" onClick={() => handleDeleteGoal(goal.id)}> - </button> */}
                         </li>
                     ))}
                 </ul>
             </div>
 
-
+            { goalView === null
+                ? null
+                : <GoalView dark = {dark} setGoalView = {setGoalView} goal  = {goalView} goals = {goals} setGoals = {setGoals} />
+            }
 
         </div>
 
     )
 
+}
+
+const GoalView = ( {dark, setGoalView, goal, goals, setGoals} )  => {
+
+    const [goalNote, setGoalNote] = useState("")
+
+    useEffect(() => {
+
+        if(goal && goal.note){
+            setGoalNote(goal.note)
+            console.log(goal.note)
+        } else {
+            setGoalNote("")
+        }
+
+    }, [goal])
+
+    const handleCloseNote = () => {
+        const update = goals.map(g => g.id === goal.id ? {...goal, note: goalNote} : g)
+
+        console.log(update)
+
+        setGoals(update)
+
+        console.log("GOAL UPDATED")
+
+        setGoalView(null)
+    }
+
+    return (
+        <div className = {`goal-view ${dark}`}>
+            <p onClick = {() => console.log(goal.note)}> Notes for <i>{goal.content}</i>: </p>
+            <textarea value = {goalNote} onChange = {(e) => setGoalNote(e.target.value)}/>
+
+            <button onClick = {handleCloseNote}> Close </button>
+        </div>
+    )
 }
 
 export default Goals

@@ -63,7 +63,7 @@ const Goals = ( {dark} ) => {
                 .then(() => {
                     console.log(`goal ${id} saved!`)
                 })
-        }, 3000)
+        }, 500)
 
     }
 
@@ -166,6 +166,7 @@ const Goals = ( {dark} ) => {
 const GoalView = ( {dark, setGoalView, goal, goals, setGoals} )  => {
 
     const [goalNote, setGoalNote] = useState("")
+    const refTimer = useRef(null)
 
     useEffect(() => {
 
@@ -177,6 +178,22 @@ const GoalView = ( {dark, setGoalView, goal, goals, setGoals} )  => {
         }
 
     }, [goal])
+
+    const handleEditNote = (e) => {
+        setGoalNote(e.target.value)
+
+        clearTimeout(refTimer.current)
+        refTimer.current = setTimeout(() => {
+            const update = goals.map(g => g.id === goal.id ? {...goal, note: goalNote} : g)
+            setGoals(update)
+
+            goalsService.update(goal.id, {...goal, note: e.target.value})
+                .then(() => {
+                    console.log( `"${goal.content}" note saved!`)
+                })
+        }, 500)
+
+    }
 
     const handleCloseNote = () => {
         const update = goals.map(g => g.id === goal.id ? {...goal, note: goalNote} : g)
@@ -193,8 +210,7 @@ const GoalView = ( {dark, setGoalView, goal, goals, setGoals} )  => {
     return (
         <div className = {`goal-view ${dark}`}>
             <p onClick = {() => console.log(goal.note)}> Notes for <i>{goal.content}</i>: </p>
-            <textarea value = {goalNote} onChange = {(e) => setGoalNote(e.target.value)}/>
-
+            <textarea value = {goalNote} onChange = {handleEditNote}/>
             <button onClick = {handleCloseNote}> Close </button>
         </div>
     )

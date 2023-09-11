@@ -96,7 +96,7 @@ const Tasks = ( {dark, user, socket} ) => {
         .then(response => {
           console.log(`task ${id} status updated!`)
         })
-    }, 3000)
+    }, 500)
 
   }
 
@@ -127,7 +127,7 @@ const Tasks = ( {dark, user, socket} ) => {
         .then(response => {
           console.log(`task ${id} progress updated!`)
         })
-    }, 3000)
+    }, 500)
 
   }
 
@@ -152,7 +152,7 @@ const Tasks = ( {dark, user, socket} ) => {
         .then(response => {
           console.log(`task ${id} saved!`)
         })
-    }, 3000)
+    }, 500)
   }
 
 

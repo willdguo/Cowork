@@ -10,6 +10,7 @@ import tasksService from './services/tasks'
 import darkIcon from './icons/light.png'
 import logoutIcon from './icons/logout.png'
 import shareIcon from './icons/share.png'
+import copyIcon from './icons/copy_icon.png'
 import Spotify from './components/Spotify'
 import joinNotif from './sounds/click-21156.mp3'
 import { io } from 'socket.io-client'
@@ -36,6 +37,7 @@ function App() {
   const n = useRef(0)
   const t = useRef(300)
   const flickers = 1
+  const [shared, setShared] = useState(false)
   const [copied, setCopied] = useState(false)
   const joinNotifTimer = useRef(null)
 
@@ -114,6 +116,22 @@ function App() {
 
   }, [desc, finalDesc])
 
+  const handleShareLink = () => {
+    const linkToCopy = "https://workspace-kappa.vercel.app/"
+
+    navigator.clipboard.writeText(linkToCopy)
+      .then(() => {
+        setShared(true)
+
+        setTimeout(() => {
+          setShared(false)
+        }, 2000) // Reset the "shared" state after 2 seconds
+
+      }).catch((error) => {
+        console.error('Failed to share link:', error)
+      })
+  }
+
   const handleCopyLink = () => {
     const linkToCopy = window.location.href
 
@@ -167,15 +185,15 @@ function App() {
         </div>
 
         <div className = "room">
-          Room: {room}
-          {/* <input placeholder = "Change room" value = {roomInput} onChange = {(e) => setRoomInput(e.target.value)} onKeyDown = {(e) => {if(e.key === "Enter"){joinRoom()}}} /> */}
+          <button onClick = {handleCopyLink}> <img src = {copyIcon} alt = "copy room link"/> </button>
+          {copied ? "Room Link Copied!" : `Room: ${room}`}
         </div>
 
         <div className = "toolbar-options">
           <button onClick = {toggleDark}> <img src = {darkIcon} alt = "toggle colors" /> </button>          
-          <button className = {dark} onClick={handleCopyLink}> <img src = {shareIcon} alt = "share" /> </button>
+          <button className = {dark} onClick={handleShareLink}> <img src = {shareIcon} alt = "share" /> </button>
           <button onClick = {logout}> <img src = {logoutIcon} alt = "logout" /> </button>
-          <p> {copied ? 'Link Copied!' : null} </p>
+          <p> {shared ? 'Link Copied!' : null} </p>
         </div>
 
       </div>

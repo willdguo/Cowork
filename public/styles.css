@@ -60,8 +60,31 @@ body,
 }
 
 .toolbar .room {
+  display: flex;
+  position: relative;
   text-align: center;
+  align-items: center;
   opacity: 60%;
+}
+
+.toolbar .room button {
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.toolbar .room button:hover {
+  background-color: #555;
+}
+
+.toolbar .room img {
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 2px;
 }
 
 .toolbar .toolbar-options {
@@ -73,7 +96,6 @@ body,
   margin-right: 6px;
   background-color: #fff;
   color: #000;
-  border: 1px solid #aaa;
   border-radius: 4px;
   /* font-size: 16px; */
   font-weight: bold;
@@ -195,7 +217,7 @@ body,
 .sidebar {
   width: 32%;
   padding: 10px;
-  padding-right: 50px;
+  padding-right: 25px;
   border-right: 1px solid #000;
 }
 
@@ -266,25 +288,16 @@ body,
 
 .goals .header h2 {
   font-weight: bold;
+  font-size: 28px;
 }
 
 .goals .header.dark {
   border-bottom: 1px solid #555;  
 }
 
-.goals .header.dark input{
-  color: #eee;
-}
-
-.goals .header.dark input::placeholder{
-  color: #bbb;
-  font-family: inherit;
-  opacity: 50%;
-}
-
 .goals .header button {
   padding: 6px 12px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   color: #444;
   background-color: transparent;
@@ -299,24 +312,31 @@ body,
 }
 
 .goals .header input {
-  padding: 6px 12px;
-  font-size: 14px;
+  /* padding: 6px 12px; */
   color: #333;
   background-color: transparent;
-  width: 60%;
-  height: 40px;
-  font-size: 20px;        
+  width: 75%;
+  height: 20px;
+  font-size: 16px;        
   border: none;
+}
 
+.goals .header.dark input{
+  color: #eee;
 }
 
 .goals .header input::placeholder {
   color: #999;
   opacity: 50%;
+  font-family: inherit;
 }
 
 .goals .header input:focus {
   outline: none;
+}
+
+.goals .header.dark input::placeholder{
+  color: #bbb;
 }
 
 .goals .goal-list {
@@ -339,7 +359,6 @@ body,
 
 .goal-list ul::-webkit-scrollbar-track {
   background-color: transparent;
-  border-left: 1px solid #222;
 }
 
 .goal-list ul::-webkit-scrollbar-thumb {
@@ -374,7 +393,7 @@ body,
   /* border-bottom: 1px solid #e0e0e0; */
   background-color: transparent;
   font-family: inherit;
-  font-size: 20px;
+  font-size: 14px;
   margin: 0px 8px 0px 8px;
   padding: 8px;
   width: 80%;
@@ -477,7 +496,12 @@ body,
   text-align: left;
 }
 
+.goals .goal-view p {
+  font-size: 12px;
+}
+
 .goals .goal-view textarea {
+  font-size: 12px;
   height: 360px;
   max-height: 360px;
   width: 100%;
@@ -496,7 +520,7 @@ body,
 .goals .goal-view button {
   position: absolute;
   top: 10px;
-  right: 20px;
+  right: 5px;
   padding: 6px 12px;
   font-size: 12px;
   background-color: transparent;
@@ -541,25 +565,19 @@ body,
   flex-direction: column;
   text-align: center;
   padding-bottom: 5px;
-  margin-bottom: 10px;
   background-color: transparent;
   border-radius: 8px;
 }
 
 .timer-container .timer {
-  font-size: 80px;
-  margin: 20px 0 0 20px;
+  font-size: 60px;
+  margin: 4px 0 0 10px;
   font-weight: bold;
-}
-
-
-.timer-container .timer-customize {
-  margin: 10px 0 0 10%;  
 }
 
 .timer-container .timer-customize input {
   padding: 10px;
-  font-size: 20px;
+  font-size: 16px;
   color: #b0b0b0;
   background-color: transparent;
   border: none;
@@ -577,7 +595,7 @@ body,
 
 .timer-container .timer-customize button {
   margin: 10px;
-  padding: 12px 24px;
+  padding: 9px 12px;
   font-size: 16px;
   font-weight: bold;
   color: #000;
@@ -616,7 +634,6 @@ body,
 
 
 .tasks {
-  text-align: center;
   border: 1px solid #999;
   border-radius: 10px;
   margin: 10px;
@@ -625,6 +642,7 @@ body,
 }
 
 .tasks .header {
+  text-align: center;
   font-family: inherit;
   border-bottom: 1px solid black;
   border-top-left-radius: 10px;
@@ -633,7 +651,7 @@ body,
 
 .tasks .header button {
   padding: 6px 12px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
   color: #888;
   background-color: transparent;
@@ -644,19 +662,17 @@ body,
 }
 
 .tasks .header button:hover{
-  /* background-color: #fff; */
   color: #fff;
 }
 
 .tasks .header .add-task {
   font-family: inherit;
   padding: 6px 12px;
-  font-size: 14px;
   color: #333;
   background-color: transparent;
   width: 60%;
   height: 40px;
-  font-size: 20px;        
+  font-size: 16px;        
   border: none;
 }
 
@@ -682,11 +698,11 @@ body,
   font-weight: bold;
   width: 80%;
   background-color: transparent;
-  font-size: 32px;
+  font-size: 28px;
   text-align: center;
   border: none;
   border-radius: 10px;
-  padding: 12px 8px;
+  padding: 6px 0px;
   color: #000;
 }
 
@@ -706,10 +722,15 @@ body,
   color: #000;
 }
 
+.tasks.coworker .header {
+  padding: 10px 0px 0px 10px;
+  font-size: 24px;
+}
+
 .task-list ul {
   font-family: inherit;
   list-style-type: none;
-  padding: 2px 7px 2px 0px;
+  padding: 2px 5px 2px 0px;
   padding-bottom: 53px;
   text-align: left;
   max-height: 270px;
@@ -724,7 +745,6 @@ body,
 
 .task-list ul::-webkit-scrollbar-track {
   background-color: transparent;
-  border-left: 1px solid #222;
 }
 
 .task-list ul::-webkit-scrollbar-thumb {
@@ -763,7 +783,6 @@ body,
   background-color: #555;
 }
 
-
 .tasks .task-list .delete-button {
   background-color: #ee6767;
   color: #FFFFFF;
@@ -785,8 +804,8 @@ body,
   border: none;
   border-bottom: 1px solid #e0e0e0;
   background-color: transparent;
-  font-size: 16px;
-  padding: 10px 4px 10px 4px;
+  font-size: 14px;
+  padding: 5px 4px 5px 4px;
   margin: 5px 2px 5px 5px;
   width: 80%;
   color: #000;
@@ -864,7 +883,7 @@ body,
   color: #444;
   border: none;
   padding: 6px 14px;
-  font-size: 8px;
+  font-size: 10px;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
@@ -878,8 +897,8 @@ body,
 
 .tasks .task-list .in-progress .task-options .show-options {
   text-align: center;
-  width: 100px;
-  font-size: 12px;
+  width: 80px;
+  font-size: 10px;
   padding: 8px 0px 8px 0px;
   background-color: #fff;
   color: #9FE59A;
@@ -892,7 +911,6 @@ body,
 .tasks .task-list .in-progress.dark .task-options .show-options {
   color: #0dc;
 }
-
 
 .strikethrough {
   text-decoration: line-through;

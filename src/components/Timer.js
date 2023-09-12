@@ -93,15 +93,14 @@ const Timer = ( {dark} ) => {
         setTime(Math.floor(input * 60))
     }
 
-    //TO DO:
-    // fix all  "hidden" and "time > 0" ternary operators
-
     return (
         
         <div className = "timer-container">
 
             <div className = "timer"> 
-                {`${time >= 3600 ? Math.floor(time / 3600) + 'h': ''}`} {Math.floor((time % 3600) / 60)}m {Math.round(time) % 60} s 
+                {`${time >= 3600 ? Math.floor(time / 3600) + 'h ': ''}`} 
+                {`${time >= 60 || time === 0 ? Math.floor((time % 3600) / 60) + 'm ' : ''}`} 
+                {`${time % 60 === 0 ? '00' : Math.round(time) % 60}`} s 
             </div>
 
             <div className = {`timer-customize ${dark}`}>

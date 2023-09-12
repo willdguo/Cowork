@@ -243,7 +243,6 @@ const Tasks = ( {dark, user, socket} ) => {
                       <input className = {`task-content ${dark} ` + (task.status ? "strikethrough" : "")} 
                           value = {task.content} 
                           onChange = {event => handleTaskEdit(task.id, event.target.value)}
-                          // onKeyDown = {event => {if(event.key === 'Enter'){handleAddTask('New Task', tasks.indexOf(task) + 1)}}}
                       />
 
                       <div className={`task-options ${dark}`}>

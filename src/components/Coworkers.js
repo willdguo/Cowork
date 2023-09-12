@@ -103,7 +103,7 @@ const CoworkerTasks = ( {username, dark, socket} ) => {
         <div className='tasks coworker'>
 
             <div className = {`header ${dark}`}>
-                <h2> {username}'s To-do List </h2>
+                <p> {username}'s To-do List </p>
             </div>
 
             <div className = "task-list">

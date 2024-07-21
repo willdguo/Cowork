@@ -1,3 +1,7 @@
+# Update (July 2024)
+
+Cowork is no longer up on the web as the backend is down.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
